@@ -40,10 +40,36 @@ def getReadLineList(path):
 		iStream.close()
 	return lineList
 
+"""
+	テキストファイルに書き込む
+"""
+def setWriteLineList(name,outstr):
+	outFileName, ext = os.path.splitext(name)
+	fout = codecs.open(outFileName + '_1gram.txt', 'a', 'utf-8')
+	fout.write(outstr) # 引数の文字列をファイルに書き込む
+	fout.close() # ファイルを閉じる
 
+"""
+	1-gramの出力
+"""
+def outputTarget(lineString):
+	output = unicode('', 'utf-8')
+	for i in range(0, len(lineString) - 1):
+		if i < len(lineString) - 1:
+			output += lineString[i:i+1]
+			if i != len(lineString) - 1:
+				output += unicode('\n', 'utf-8')
+	return output
+
+"""
+	メイン関数
+"""
 if __name__ == "__main__":
 	txtPath = getTextPathInCommandLine()
 	textList = getReadLineList(txtPath)
-	
-#	for line in textList:
-#		print line
+	outstr = ""
+
+	for i,line in enumerate(textList):
+		outstr = outputTarget(line)
+		setWriteLineList(txtPath, outstr)
+
