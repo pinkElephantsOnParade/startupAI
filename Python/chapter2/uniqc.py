@@ -49,17 +49,17 @@ def fileFormatCheck(textList):
 		print 'Usage: #0 This text format is incorrect.'
 		quit()
 
-	initTxtLength = len(textList[0].rstrip())
+	initTxtLength = len(textList[0].strip())
 
 	for lists in textList:
-		if len(lists.rstrip()) != 0:
-			if initTxtLength != len(lists.rstrip()):
+		if len(lists.strip()) != 0:
+			if initTxtLength != len(lists.strip()):
 				print 'Usage: #1 This text format is incorrect.'
 				quit()
 
 
 txtPath = getTextPathInCommandLine()
-textList = getReadLineList(txtPath)
+textList = [item.strip() for item in getReadLineList(txtPath)]
 fileFormatCheck(textList)
 
 #要素をソート
