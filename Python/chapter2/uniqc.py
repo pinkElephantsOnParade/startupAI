@@ -57,10 +57,6 @@ def fileFormatCheck(textList):
 				print 'Usage: #1 This text format is incorrect.'
 				quit()
 
-"""
-	リストから重複要素を削除する
-	(python って unique関数が標準で備わっていないんですね。)
-"""
 
 txtPath = getTextPathInCommandLine()
 textList = getReadLineList(txtPath)
