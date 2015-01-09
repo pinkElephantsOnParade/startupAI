@@ -68,9 +68,7 @@ def makeListInElementCount(objList):
 
 	for lists in uniqueList:
 		countDic[lists] = objList.count(lists)
-#		numList.append(objList.count(lists))
 
-#	return [uniqueList, numList]
 	return sorted(countDic.items(), key=lambda x: x[1], reverse=True)
 
 if __name__ == "__main__":
