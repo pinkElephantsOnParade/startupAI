@@ -57,15 +57,15 @@ def fileFormatCheck(textList):
 				print 'Usage: #1 This text format is incorrect.'
 				quit()
 
+if __name__ == "__main__":
+	txtPath = getTextPathInCommandLine()
+	textList = [item.strip() for item in getReadLineList(txtPath)]
+	fileFormatCheck(textList)
 
-txtPath = getTextPathInCommandLine()
-textList = [item.strip() for item in getReadLineList(txtPath)]
-fileFormatCheck(textList)
+	#要素をソート
+	uniqueList = list(set(textList))
+	uniqueList.sort()	
 
-#要素をソート
-uniqueList = list(set(textList))
-uniqueList.sort()	
-
-for line in uniqueList:
-	print line
+	for line in uniqueList:
+		print line
 
