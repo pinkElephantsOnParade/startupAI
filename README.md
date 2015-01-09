@@ -26,7 +26,7 @@
     </tr>
     <tr>
         <td>ai2.c</td>
-        <td>al2.py</td>
+        <td>ai2.py</td>
         <td></td>
         <td></td>
     </tr>
@@ -84,7 +84,7 @@
     </tr>
     <tr>
         <td>ai3.c</td>
-        <td>al3.py</td>
+        <td>ai3.py</td>
         <td></td>
         <td></td>
     </tr>
@@ -131,13 +131,118 @@
 調整中
 
 ####第5章
+<table>
+    <tr>
+        <th>c </th>
+        <th>python</th>
+        <th>ruby</th>
+        <th>内容</th>
+    </tr>
+    <tr>
+        <td>ai5.c</td>
+        <td>ai5.py</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>cutkk.c</td>
+        <td>cutkk.py</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>makesnet.c</td>
+        <td>makesnet.py</td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
 
 
 ####第6章
+<table>
+    <tr>
+        <th>c </th>
+        <th>python</th>
+        <th>ruby</th>
+        <th>内容</th>
+    </tr>
+    <tr>
+        <td>ai6.c</td>
+        <td>ai6.py</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>ga_a.c</td>
+        <td>ga_a.py</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>ga_b.c</td>
+        <td>ga_b.py</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>rsearch.c</td>
+        <td>rsearch.py</td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+
 
 ####第7章
+<table>
+    <tr>
+        <th>c </th>
+        <th>python</th>
+        <th>ruby</th>
+        <th>内容</th>
+    </tr>
+    <tr>
+        <td>agent.c</td>
+        <td>agent.py</td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+
 ####第8章
+<table>
+    <tr>
+        <th>c </th>
+        <th>python</th>
+        <th>ruby</th>
+        <th>内容</th>
+    </tr>
+    <tr>
+        <td>ai8.c</td>
+        <td>ai8.py</td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+
+
 ####第9章
+<table>
+    <tr>
+        <th>c </th>
+        <th>python</th>
+        <th>ruby</th>
+        <th>内容</th>
+    </tr>
+    <tr>
+        <td>ai9.c</td>
+        <td>ai9.py</td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+
 
 注意
 ----------------------------------------------------------------------------------------------------
