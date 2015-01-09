@@ -64,17 +64,20 @@ def fileFormatCheck(textList):
 def makeListInElementCount(objList):
 	uniqueList = list(set(objList))
 	numList = []
+	countDic = {}
 
 	for lists in uniqueList:
-		numList.append(objList.count(lists))
+		countDic[lists] = objList.count(lists)
+#		numList.append(objList.count(lists))
 
-	return [uniqueList, numList]
-
+#	return [uniqueList, numList]
+	return sorted(countDic.items(), key=lambda x: x[1], reverse=True)
 
 if __name__ == "__main__":
 	txtPath = getTextPathInCommandLine()
 	textList = [item.strip() for item in getReadLineList(txtPath)]
 	fileFormatCheck(textList)
+	countList = []
 
 	#python2.7以前の場合
 	if sys.version_info[1] < 7:
