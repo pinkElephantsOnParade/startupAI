@@ -75,10 +75,63 @@
 </table>
 
 ####第3章
+<table>
+    <tr>
+        <th>c </th>
+        <th>python</th>
+        <th>ruby</th>
+        <th>内容</th>
+    </tr>
+    <tr>
+        <td>ai3.c</td>
+        <td>al3.py</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>cutm_p.c</td>
+        <td>cutm_p.py</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>cutmorph.c</td>
+        <td>cutmorph.py</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>cutnav.c</td>
+        <td>cutnav.py</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>genbymorph.c</td>
+        <td>genbymorph.py</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>gens1.c</td>
+        <td>gens1.py</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>gens2.c</td>
+        <td>gens2.py</td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+
 
 ####第4章
+調整中
 
 ####第5章
+
 
 ####第6章
 
@@ -88,5 +141,5 @@
 
 注意
 ----------------------------------------------------------------------------------------------------
-python は 2.7.X系に準拠しています。それ以前の2系のバージョンではうまく実行しない可能性があります。
+python は 2.7.X系に準拠しています。それ以前の2系のバージョンではうまく実行しない可能性があります。<br>
 python 3系は全く動きません!!!
