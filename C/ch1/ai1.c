@@ -1,22 +1,22 @@
-//	‰‚ß‚Ä‚ÌlH–³”\ƒvƒƒOƒ‰ƒ€@ai1.c
-//	‚±‚ÌƒvƒƒOƒ‰ƒ€‚ÍCí‚ÉŒˆ‚Ü‚Á‚½•Ô“š‚ð•Ô‚·lH–³”\‚Å‚·
-//	–{“–‚É–³”\‚Å‚·‚Ë
+//	åˆã‚ã¦ã®äººå·¥ç„¡èƒ½ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã€€ai1.c
+//	ã“ã®ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã¯ï¼Œå¸¸ã«æ±ºã¾ã£ãŸè¿”ç­”ã‚’è¿”ã™äººå·¥ç„¡èƒ½ã§ã™
+//	æœ¬å½“ã«ç„¡èƒ½ã§ã™ã­
 
 #include<stdio.h>
 #define MAXLINE 256
 int main()
 {
- char line[MAXLINE] ;//“ü—Íƒoƒbƒtƒ@
+ char line[MAXLINE] ;//å…¥åŠ›ãƒãƒƒãƒ•ã‚¡
 
- /*ƒI[ƒvƒjƒ“ƒOƒƒbƒZ[ƒW*/
- printf("‚³‚­‚çFƒƒbƒZ[ƒW‚ð‚Ç‚¤‚¼\n");
- printf("‚ ‚È‚½F");
- /*‰ï˜b‚µ‚Ü‚µ‚å‚¤*/
+ /*ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸*/
+ printf("ã•ãã‚‰ï¼šãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’ã©ã†ãž\n");
+ printf("ã‚ãªãŸï¼š");
+ /*ä¼šè©±ã—ã¾ã—ã‚‡ã†*/
  while(fgets(line,MAXLINE,stdin)!=NULL){
-  printf("‚³‚­‚çF‚Ó`‚ñC‚»‚ê‚ÅH\n");
-  printf("‚ ‚È‚½F");
+  printf("ã•ãã‚‰ï¼šãµã€œã‚“ï¼Œãã‚Œã§ï¼Ÿ\n");
+  printf("ã‚ãªãŸï¼š");
  }
- /*ƒGƒ“ƒfƒBƒ“ƒOƒƒbƒZ[ƒW*/
- printf("‚³‚­‚çF‚Î‚¢‚Î`‚¢\n");
+ /*ã‚¨ãƒ³ãƒ‡ã‚£ãƒ³ã‚°ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸*/
+ printf("ã•ãã‚‰ï¼šã°ã„ã°ã€œã„\n");
  return 0 ;
 }

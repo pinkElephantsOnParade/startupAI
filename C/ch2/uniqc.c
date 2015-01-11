@@ -1,22 +1,22 @@
 //	uniqc.c
-//	d•¡s‚Ì”‚¦ã‚°‚Æíœ
-//	“¯‚¶s‚ÌŒJ‚è•Ô‚µ‚ğíœ‚µ‚Ü‚·
+//	é‡è¤‡è¡Œã®æ•°ãˆä¸Šã’ã¨å‰Šé™¤
+//	åŒã˜è¡Œã®ç¹°ã‚Šè¿”ã—ã‚’å‰Šé™¤ã—ã¾ã™
 
 #include<stdio.h>
 #include<string.h>
-#define MAXLINE 65535 //1s64kƒoƒCƒg‚Ü‚Åˆ—‰Â”\
+#define MAXLINE 65535 //1è¡Œ64kãƒã‚¤ãƒˆã¾ã§å‡¦ç†å¯èƒ½
 
 int main()
 {
- char new[MAXLINE] ;//“ü—Ís
- char old[MAXLINE] ;//‘O‚Ìs
- int count=1 ;//d•¡‰ñ”‚Ì”‚¦ã‚°
+ char new[MAXLINE] ;//å…¥åŠ›è¡Œ
+ char old[MAXLINE] ;//å‰ã®è¡Œ
+ int count=1 ;//é‡è¤‡å›æ•°ã®æ•°ãˆä¸Šã’
 
- /*ƒeƒLƒXƒg‚ğ“Ç‚İ‚Ş*/
+ /*ãƒ†ã‚­ã‚¹ãƒˆã‚’èª­ã¿è¾¼ã‚€*/
  fgets(old,MAXLINE,stdin) ;
  while(fgets(new,MAXLINE,stdin)!=NULL){
-  if(strcmp(new,old)==0) ++count ;//“™‚µ‚¢s
-  else{//ˆÙ‚È‚és
+  if(strcmp(new,old)==0) ++count ;//ç­‰ã—ã„è¡Œ
+  else{//ç•°ãªã‚‹è¡Œ
    printf("%d\t%s",count,old);
    count=1 ;
    strcpy(old,new) ;

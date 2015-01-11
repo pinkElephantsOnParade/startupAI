@@ -1,23 +1,23 @@
-//	ˆâ“`“IƒAƒ‹ƒSƒŠƒYƒ€‚É‚æ‚é’TõƒvƒƒOƒ‰ƒ€  ga_b.c
-// ga_a‚Æ•]‰¿•û–@‚ªˆÙ‚È‚è‚Ü‚·(fitnessŠÖ”‚ªˆÙ‚È‚è‚Ü‚·j
+//	éºä¼çš„ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã«ã‚ˆã‚‹æ¢ç´¢ãƒ—ãƒ­ã‚°ãƒ©ãƒ   ga_b.c
+// ga_aã¨è©•ä¾¡æ–¹æ³•ãŒç•°ãªã‚Šã¾ã™(fitnessé–¢æ•°ãŒç•°ãªã‚Šã¾ã™ï¼‰
 
 
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
 
-#define POOLSIZE 30  //ƒv[ƒ‹ƒTƒCƒY
-#define RULESIZE 4  //ˆâ“`q‚Ì‚Âƒ‹[ƒ‹‚Ì”
-#define LOCUSSIZE 4 //‚Ğ‚Æ‚Â‚Ìƒ‹[ƒ‹‚ª‚Âˆâ“`qÀ‚Ì”
+#define POOLSIZE 30  //ãƒ—ãƒ¼ãƒ«ã‚µã‚¤ã‚º
+#define RULESIZE 4  //éºä¼å­ã®æŒã¤ãƒ«ãƒ¼ãƒ«ã®æ•°
+#define LOCUSSIZE 4 //ã²ã¨ã¤ã®ãƒ«ãƒ¼ãƒ«ãŒæŒã¤éºä¼å­åº§ã®æ•°
 
-#define GMAX 3000 //‘Å‚¿Ø‚è¢‘ã
-#define MRATE 0.1 //“Ë‘R•ÏˆÙ—¦
+#define GMAX 3000 //æ‰“ã¡åˆ‡ã‚Šä¸–ä»£
+#define MRATE 0.1 //çªç„¶å¤‰ç•°ç‡
 
-#define LOWERLIMIT 1000 //ˆâ“`q‚ğˆóš‚·‚éÅ’á“K‰“x
-#define MAXLINES 64 //ƒL[ƒ[ƒh‚Ì‘g‚İ‡‚í‚¹‚ÌÅ‘å”
-#define LINESIZE 64 //ƒL[ƒ[ƒhƒf[ƒ^‚ÌsƒTƒCƒY
+#define LOWERLIMIT 1000 //éºä¼å­ã‚’å°å­—ã™ã‚‹æœ€ä½é©å¿œåº¦
+#define MAXLINES 64 //ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ã®çµ„ã¿åˆã‚ã›ã®æœ€å¤§æ•°
+#define LINESIZE 64 //ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ãƒ‡ãƒ¼ã‚¿ã®è¡Œã‚µã‚¤ã‚º
 
-/*numˆÈ‰º‚Ì—”‚ğƒZƒbƒg*/
+/*numä»¥ä¸‹ã®ä¹±æ•°ã‚’ã‚»ãƒƒãƒˆ*/
 int setrnd(int num)
 {
  int rndno ;
@@ -26,32 +26,32 @@ int setrnd(int num)
 
 }
 
-/*ˆâ“`qƒv[ƒ‹‚Ì‰Šú‰»*/
+/*éºä¼å­ãƒ—ãƒ¼ãƒ«ã®åˆæœŸåŒ–*/
 void initgene(char gene[POOLSIZE][RULESIZE][LOCUSSIZE])
 {
  int i,j,k ;
  for(i=0;i<POOLSIZE;++i)
   for(j=0;j<RULESIZE;++j)
    for(k=0;k<LOCUSSIZE;++k)
-    gene[i][j][k]='A'+setrnd(26) ;//ƒ‰ƒ“ƒ_ƒ€‚É‰Šú’l‚ğƒZƒbƒg
+    gene[i][j][k]='A'+setrnd(26) ;//ãƒ©ãƒ³ãƒ€ãƒ ã«åˆæœŸå€¤ã‚’ã‚»ãƒƒãƒˆ
 }
 
-/*ƒ‹[ƒ‹‚ª‰½‰ñƒf[ƒ^‚Æƒ}ƒbƒ`‚·‚é‚©‚ğŒvZ*/
+/*ãƒ«ãƒ¼ãƒ«ãŒä½•å›ãƒ‡ãƒ¼ã‚¿ã¨ãƒãƒƒãƒã™ã‚‹ã‹ã‚’è¨ˆç®—*/
 int score(char *singlerule,char lines[MAXLINES][LINESIZE],int lineno)
 {
  int i,l ;
- int score=0 ;//ƒ}ƒbƒ`‚µ‚½ƒf[ƒ^‚Ìs”
+ int score=0 ;//ãƒãƒƒãƒã—ãŸãƒ‡ãƒ¼ã‚¿ã®è¡Œæ•°
  int localscore ;
  for(l=0;l<lineno;++l){
   localscore=0 ;
-  for(i=0;i<LOCUSSIZE;++i)//ŠeƒL[ƒ[ƒh‚ğ’²‚×‚é
+  for(i=0;i<LOCUSSIZE;++i)//å„ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ã‚’èª¿ã¹ã‚‹
    if(strchr(lines[l],singlerule[i])!=NULL) ++localscore ;
-  if(localscore>=LOCUSSIZE) ++score ;//Š®‘S‚Éˆê’v
+  if(localscore>=LOCUSSIZE) ++score ;//å®Œå…¨ã«ä¸€è‡´
  }
  return score ;
 }
 
-/*i”Ô–Ú‚ÌõF‘Ì‚Ì“K‰“x‚ğŒvZ*/
+/*iç•ªç›®ã®æŸ“è‰²ä½“ã®é©å¿œåº¦ã‚’è¨ˆç®—*/
 int fitness(char sgene[RULESIZE][LOCUSSIZE],char lines[MAXLINES][LINESIZE],int lineno)
 {
  int j,fvalue=0,fpenalty=0,sscore,totalfitness ;
@@ -60,31 +60,31 @@ int fitness(char sgene[RULESIZE][LOCUSSIZE],char lines[MAXLINES][LINESIZE],int l
   fpenalty+=sscore*sscore ;
   fvalue+=sscore ;
  }
- if(fvalue>=lineno) fvalue=lineno ;//ãŒÀ‚ğ‘ƒ‹[ƒ‹”‚É§ŒÀ
+ if(fvalue>=lineno) fvalue=lineno ;//ä¸Šé™ã‚’ç·ãƒ«ãƒ¼ãƒ«æ•°ã«åˆ¶é™
  totalfitness=fvalue*fvalue-fpenalty ;
  if(totalfitness<0) totalfitness=0 ;
  return totalfitness ;
 }
 
-/*ˆâ“`qƒv[ƒ‹‚Ìo—Í*/
+/*éºä¼å­ãƒ—ãƒ¼ãƒ«ã®å‡ºåŠ›*/
 void printgene(char gene[POOLSIZE][RULESIZE][LOCUSSIZE],char lines[MAXLINES][LINESIZE],int lineno)
 {
  int i,j,k ;
  int fvalue ;
  for(i=0;i<POOLSIZE;++i){
   fvalue=fitness(gene[i],lines,lineno) ;
-  if(fvalue>=LOWERLIMIT){//‚±‚ÌğŒ‚ğ•ÏX‚·‚é‚Æ•\¦—Ê‚ğ’²®‚Å‚«‚Ü‚·
+  if(fvalue>=LOWERLIMIT){//ã“ã®æ¡ä»¶ã‚’å¤‰æ›´ã™ã‚‹ã¨è¡¨ç¤ºé‡ã‚’èª¿æ•´ã§ãã¾ã™
    printf("%3d : ",i) ;
    for(j=0;j<RULESIZE;++j){
     for(k=0;k<LOCUSSIZE;++k)
      printf("%c ",gene[i][j][k]) ;
     if(j<RULESIZE-1) printf(", ") ;
    }
-   printf("     %d\n",fvalue) ;//“K‰“x‚Ìo—Í
+   printf("     %d\n",fvalue) ;//é©å¿œåº¦ã®å‡ºåŠ›
   }
  }
 }
-/*ˆâ“`qƒv[ƒ‹‚Ì¢‘ã•½‹Ï“K‰“x‚ÌŒvZ*/
+/*éºä¼å­ãƒ—ãƒ¼ãƒ«ã®ä¸–ä»£å¹³å‡é©å¿œåº¦ã®è¨ˆç®—*/
 double fave(char gene[POOLSIZE][RULESIZE][LOCUSSIZE],char lines[MAXLINES][LINESIZE],int lineno)
 {
  int i ;
@@ -95,26 +95,26 @@ double fave(char gene[POOLSIZE][RULESIZE][LOCUSSIZE],char lines[MAXLINES][LINESI
  return fsum/POOLSIZE ;
 }
 
-/*ƒL[ƒ[ƒhƒf[ƒ^‚Ì“Ç‚İ‚İ*/
+/*ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ãƒ‡ãƒ¼ã‚¿ã®èª­ã¿è¾¼ã¿*/
 int readlines(char lines[MAXLINES][LINESIZE])
 {
  int n=0 ;
 
- /*“Ç‚İ‚İˆ—*/
+ /*èª­ã¿è¾¼ã¿å‡¦ç†*/
  while(fgets(lines[n++],LINESIZE,stdin)!=NULL){
-  if(n>=MAXLINES){//s”‚ªãŒÀ‚ğ’´‚¦‚Ä‚¢‚é
+  if(n>=MAXLINES){//è¡Œæ•°ãŒä¸Šé™ã‚’è¶…ãˆã¦ã„ã‚‹
    --n ;
-   printf("Œx@s”‚ğ%d‚É§ŒÀ‚µ‚Ü‚µ‚½\n",n) ;
+   printf("è­¦å‘Šã€€è¡Œæ•°ã‚’%dã«åˆ¶é™ã—ã¾ã—ãŸ\n",n) ;
    break ;
   }
-  if(strlen(lines[n-1])<=2){//ƒL[ƒ[ƒh‚Ì‹Lq‚³‚ê‚Ä‚¢‚È‚¢s‚Ìˆ—
+  if(strlen(lines[n-1])<=2){//ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ã®è¨˜è¿°ã•ã‚Œã¦ã„ãªã„è¡Œã®å‡¦ç†
    --n;
    break ;
   }
  }
  return n ;
 }
-/*“Ë‘R•ÏˆÙ*/
+/*çªç„¶å¤‰ç•°*/
 void mutation(char midgene[POOLSIZE*2][RULESIZE][LOCUSSIZE])
 {
  int i,j,k ;
@@ -123,13 +123,13 @@ void mutation(char midgene[POOLSIZE*2][RULESIZE][LOCUSSIZE])
    for(j=0;j<RULESIZE;++j)
     for(k=0;k<LOCUSSIZE;++k){
      if(setrnd(1.0/MRATE)<1){
-      midgene[i][j][k]='A'+setrnd(26) ;//“Ë‘R•ÏˆÙ
+      midgene[i][j][k]='A'+setrnd(26) ;//çªç„¶å¤‰ç•°
      }
     }
 }
 
 
-/*midgeneƒv[ƒ‹‚Ì“K‰“x‚ÌŒvZ*/
+/*midgeneãƒ—ãƒ¼ãƒ«ã®é©å¿œåº¦ã®è¨ˆç®—*/
 void setfvalue(char midgene[POOLSIZE*2][RULESIZE][LOCUSSIZE],
             int fvalue[],char lines[MAXLINES][LINESIZE],int lineno)
 {
@@ -138,7 +138,7 @@ void setfvalue(char midgene[POOLSIZE*2][RULESIZE][LOCUSSIZE],
   fvalue[i]=fitness(midgene[i],lines,lineno)+1 ;
 }
 
-/*“K‰“x‚Ì‡Œv‚ÌŒvZ*/
+/*é©å¿œåº¦ã®åˆè¨ˆã®è¨ˆç®—*/
 int sumupfvalue(int fvalue[])
 {
  int i;
@@ -148,42 +148,42 @@ int sumupfvalue(int fvalue[])
  return sum ;
 }
 
-/*ƒ|ƒCƒ“ƒ^‚ÌƒCƒ“ƒNƒŠƒƒ“ƒg*/
+/*ãƒã‚¤ãƒ³ã‚¿ã®ã‚¤ãƒ³ã‚¯ãƒªãƒ¡ãƒ³ãƒˆ*/
 int incpoint(int point)
 {
  ++point ;
- if(point>=POOLSIZE*2) point=0 ;//‚Í‚¶‚ß‚É–ß‚·
+ if(point>=POOLSIZE*2) point=0 ;//ã¯ã˜ã‚ã«æˆ»ã™
  return point ;
 }
 	
-/*ƒ‹[ƒŒƒbƒg‚ğ‰ñ‚µ‚Ä‚Ğ‚Æ‚Âˆâ“`q‚ğ‘I‚Ô*/
+/*ãƒ«ãƒ¼ãƒ¬ãƒƒãƒˆã‚’å›ã—ã¦ã²ã¨ã¤éºä¼å­ã‚’é¸ã¶*/
 int roulette(int fvalue[POOLSIZE*2],int sumf,int point)
 {
- int step ;//ƒ‹[ƒŒƒbƒg‚Ì’l
- int acc=0 ;//“K‰“x‚ÌÏZ’l
+ int step ;//ãƒ«ãƒ¼ãƒ¬ãƒƒãƒˆã®å€¤
+ int acc=0 ;//é©å¿œåº¦ã®ç©ç®—å€¤
 
- step=setrnd(sumf);//ƒ‹[ƒŒƒbƒg‚Ì’l‚ğŒˆ’è
+ step=setrnd(sumf);//ãƒ«ãƒ¼ãƒ¬ãƒƒãƒˆã®å€¤ã‚’æ±ºå®š
  while(acc<step){
   point=incpoint(point) ;
   acc+=fvalue[point] ;
  }
- fvalue[point]=0 ;//‚Q“x‘I‚Î‚ê‚È‚¢‚æ‚¤‚É‚·‚é
+ fvalue[point]=0 ;//ï¼’åº¦é¸ã°ã‚Œãªã„ã‚ˆã†ã«ã™ã‚‹
  return point ;
 }
 
-/*‘I‘ğ*/
+/*é¸æŠ*/
 void selection(char gene[POOLSIZE][RULESIZE][LOCUSSIZE],char midgene[POOLSIZE*2][RULESIZE][LOCUSSIZE],
    char lines[MAXLINES][LINESIZE],int lineno)
 {
  int i,j,k ;
- int fvalue[POOLSIZE*2] ;//midgeneƒv[ƒ‹‚Ì“K‰“x
- int sumf ;//“K‰“x‚Ì‡Œv’l
- int point=0 ;//ƒ‹[ƒŒƒbƒg‚ÌƒXƒ^[ƒgêŠ
+ int fvalue[POOLSIZE*2] ;//midgeneãƒ—ãƒ¼ãƒ«ã®é©å¿œåº¦
+ int sumf ;//é©å¿œåº¦ã®åˆè¨ˆå€¤
+ int point=0 ;//ãƒ«ãƒ¼ãƒ¬ãƒƒãƒˆã®ã‚¹ã‚¿ãƒ¼ãƒˆå ´æ‰€
  int midpoint ;
  
- setfvalue(midgene,fvalue,lines,lineno) ;//fvalue‚É’l‚ğƒZƒbƒg
- sumf=sumupfvalue(fvalue) ;//“K‰“x‚Ì‡Œv’l‚ğŒvZ
- for(i=0;i<POOLSIZE;++i){//ƒ‹[ƒŒƒbƒg‚É‚µ‚½‚ª‚Á‚Ä‘I‘ğ
+ setfvalue(midgene,fvalue,lines,lineno) ;//fvalueã«å€¤ã‚’ã‚»ãƒƒãƒˆ
+ sumf=sumupfvalue(fvalue) ;//é©å¿œåº¦ã®åˆè¨ˆå€¤ã‚’è¨ˆç®—
+ for(i=0;i<POOLSIZE;++i){//ãƒ«ãƒ¼ãƒ¬ãƒƒãƒˆã«ã—ãŸãŒã£ã¦é¸æŠ
   midpoint=roulette(fvalue,sumf,point) ;
   for(j=0;j<RULESIZE;++j)
    for(k=0;k<LOCUSSIZE;++k)
@@ -191,30 +191,30 @@ void selection(char gene[POOLSIZE][RULESIZE][LOCUSSIZE],char midgene[POOLSIZE*2]
  }
 }
 
-/*ƒ|ƒCƒ“ƒ^‚ÌƒCƒ“ƒNƒŠƒƒ“ƒg(groulette—pj*/
+/*ãƒã‚¤ãƒ³ã‚¿ã®ã‚¤ãƒ³ã‚¯ãƒªãƒ¡ãƒ³ãƒˆ(grouletteç”¨ï¼‰*/
 int gincpoint(int point)
 {
  ++point ;
- if(point>=POOLSIZE) point=0 ;//‚Í‚¶‚ß‚É–ß‚·
+ if(point>=POOLSIZE) point=0 ;//ã¯ã˜ã‚ã«æˆ»ã™
  return point ;
 }
 	
-/*ƒ‹[ƒŒƒbƒg‚ğ‰ñ‚µ‚Ä‚Ğ‚Æ‚Âˆâ“`q‚ğ‘I‚Ô(Œğ³—pj*/
+/*ãƒ«ãƒ¼ãƒ¬ãƒƒãƒˆã‚’å›ã—ã¦ã²ã¨ã¤éºä¼å­ã‚’é¸ã¶(äº¤å‰ç”¨ï¼‰*/
 int groulette(int fvalue[POOLSIZE],int sumf,int point)
 {
- int step ;//ƒ‹[ƒŒƒbƒg‚Ì’l
- int acc=0 ;//“K‰“x‚ÌÏZ’l
+ int step ;//ãƒ«ãƒ¼ãƒ¬ãƒƒãƒˆã®å€¤
+ int acc=0 ;//é©å¿œåº¦ã®ç©ç®—å€¤
 
- step=setrnd(sumf);//ƒ‹[ƒŒƒbƒg‚Ì’l‚ğŒˆ’è
+ step=setrnd(sumf);//ãƒ«ãƒ¼ãƒ¬ãƒƒãƒˆã®å€¤ã‚’æ±ºå®š
  while(acc<step){
   point=gincpoint(point) ;
   acc+=fvalue[point] ;
  }
-// fvalue[point]=0 ;//‚Q“x‘I‚Î‚ê‚Ä‚à—Ç‚¢
+// fvalue[point]=0 ;//ï¼’åº¦é¸ã°ã‚Œã¦ã‚‚è‰¯ã„
  return point ;
 }
 
-/*ˆê—lŒğ³*/
+/*ä¸€æ§˜äº¤å‰*/
 void singlecrossover(char p1[RULESIZE][LOCUSSIZE],char p2[RULESIZE][LOCUSSIZE],
                 char c1[RULESIZE][LOCUSSIZE],char c2[RULESIZE][LOCUSSIZE])
 {
@@ -234,21 +234,21 @@ void singlecrossover(char p1[RULESIZE][LOCUSSIZE],char p2[RULESIZE][LOCUSSIZE],
  }
 }
 
-/*Œğ³*/
+/*äº¤å‰*/
 void crossover(char midgene[POOLSIZE*2][RULESIZE][LOCUSSIZE],char gene[POOLSIZE][RULESIZE][LOCUSSIZE]
                 ,char lines[MAXLINES][LINESIZE],int lineno)
 {
  int i,j,k ;
- int gfvalue[POOLSIZE] ;//geneƒv[ƒ‹‚Ì“K‰“x
- int gsumf=0 ;//“K‰“x‚Ì‡Œv’l
- int point=0 ;//ƒ‹[ƒŒƒbƒg‚ÌƒXƒ^[ƒgêŠ
+ int gfvalue[POOLSIZE] ;//geneãƒ—ãƒ¼ãƒ«ã®é©å¿œåº¦
+ int gsumf=0 ;//é©å¿œåº¦ã®åˆè¨ˆå€¤
+ int point=0 ;//ãƒ«ãƒ¼ãƒ¬ãƒƒãƒˆã®ã‚¹ã‚¿ãƒ¼ãƒˆå ´æ‰€
  int midpoint ;
  
  for(i=0;i<POOLSIZE;++i)
-  gfvalue[i]=fitness(gene[i],lines,lineno)+1 ;//fvalue‚É’l‚ğƒZƒbƒg
+  gfvalue[i]=fitness(gene[i],lines,lineno)+1 ;//fvalueã«å€¤ã‚’ã‚»ãƒƒãƒˆ
  for(i=0;i<POOLSIZE;++i)
-  gsumf+=gfvalue[i] ;//“K‰“x‚Ì‡Œv’l‚ğŒvZ
- for(i=0;i<POOLSIZE;++i){//ƒ‹[ƒŒƒbƒg‚É‚µ‚½‚ª‚Á‚Ä‘I‘ğ
+  gsumf+=gfvalue[i] ;//é©å¿œåº¦ã®åˆè¨ˆå€¤ã‚’è¨ˆç®—
+ for(i=0;i<POOLSIZE;++i){//ãƒ«ãƒ¼ãƒ¬ãƒƒãƒˆã«ã—ãŸãŒã£ã¦é¸æŠ
   singlecrossover(gene[point=groulette(gfvalue,gsumf,point)],
                   gene[point=groulette(gfvalue,gsumf,point)],
                   midgene[2*i],midgene[2*i+1]) ;
@@ -259,23 +259,23 @@ void crossover(char midgene[POOLSIZE*2][RULESIZE][LOCUSSIZE],char gene[POOLSIZE]
 
 int main()
 {
- char gene[POOLSIZE][RULESIZE][LOCUSSIZE] ;//ˆâ“`qƒv[ƒ‹
- char midgene[POOLSIZE*2][RULESIZE][LOCUSSIZE] ;//‘B’†‚Ìˆâ“`qƒv[ƒ‹
- char lines[MAXLINES][LINESIZE] ;//ƒL[ƒ[ƒh‚Ìƒf[ƒ^
- int lineno ;//ƒL[ƒ[ƒhƒf[ƒ^‚Ìs”
+ char gene[POOLSIZE][RULESIZE][LOCUSSIZE] ;//éºä¼å­ãƒ—ãƒ¼ãƒ«
+ char midgene[POOLSIZE*2][RULESIZE][LOCUSSIZE] ;//å¢—æ®–ä¸­ã®éºä¼å­ãƒ—ãƒ¼ãƒ«
+ char lines[MAXLINES][LINESIZE] ;//ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ã®ãƒ‡ãƒ¼ã‚¿
+ int lineno ;//ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ãƒ‡ãƒ¼ã‚¿ã®è¡Œæ•°
  int generation ;
- srand(0) ;//—”‚Ì‰Šú‰»
- lineno=readlines(lines) ;//ƒL[ƒ[ƒhƒf[ƒ^‚Ì“Ç‚İ‚İ
- initgene(gene) ;//ˆâ“`qƒv[ƒ‹‚Ì‰Šú‰»
+ srand(0) ;//ä¹±æ•°ã®åˆæœŸåŒ–
+ lineno=readlines(lines) ;//ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ãƒ‡ãƒ¼ã‚¿ã®èª­ã¿è¾¼ã¿
+ initgene(gene) ;//éºä¼å­ãƒ—ãƒ¼ãƒ«ã®åˆæœŸåŒ–
  for(generation=0;generation<GMAX;++generation){
-  printf("‘æ%d¢‘ã •½‹Ï“K‰“x %f\n",generation,fave(gene,lines,lineno)) ;
-  printgene(gene,lines,lineno) ;//ˆâ“`qƒv[ƒ‹‚Ìo—Í
-  crossover(midgene,gene,lines,lineno) ;//Œğ³
-  mutation(midgene) ;//“Ë‘R•ÏˆÙ
-  selection(gene,midgene,lines,lineno) ;//‘I‘ğ
+  printf("ç¬¬%dä¸–ä»£ å¹³å‡é©å¿œåº¦ %f\n",generation,fave(gene,lines,lineno)) ;
+  printgene(gene,lines,lineno) ;//éºä¼å­ãƒ—ãƒ¼ãƒ«ã®å‡ºåŠ›
+  crossover(midgene,gene,lines,lineno) ;//äº¤å‰
+  mutation(midgene) ;//çªç„¶å¤‰ç•°
+  selection(gene,midgene,lines,lineno) ;//é¸æŠ
  }
-  printf("‘æ%d¢‘ã •½‹Ï“K‰“x %f\n",generation,fave(gene,lines,lineno)) ;
-  printgene(gene,lines,lineno) ;//ˆâ“`qƒv[ƒ‹‚Ìo—Í
+  printf("ç¬¬%dä¸–ä»£ å¹³å‡é©å¿œåº¦ %f\n",generation,fave(gene,lines,lineno)) ;
+  printgene(gene,lines,lineno) ;//éºä¼å­ãƒ—ãƒ¼ãƒ«ã®å‡ºåŠ›
 
  return 0 ;
 }

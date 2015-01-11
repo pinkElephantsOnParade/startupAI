@@ -1,20 +1,20 @@
 //	ai6.c
-//      ŠwK‚É‚æ‚èŒêœb‚ğ‘‚â‚·lH–³”\ƒvƒƒOƒ‰ƒ€
-//	Œ³‚É‚È‚é‚Ì‚ÍCŒ`‘Ô‘f‚Ì˜A½‚É‚æ‚è•¶‚ğì¬‚·‚élH–³”\ƒvƒƒOƒ‰ƒ€ai3.c
-// ‚¨‚æ‚ÑCŒ`‘Ô‘fØ‚èo‚µƒvƒƒOƒ‰ƒ€cutm_p.cƒvƒƒOƒ‰ƒ€‚Å‚·
-//	Œ`‘Ô‘f‚Ì˜A½‚ªŠi”[‚³‚ê‚½ƒtƒ@ƒCƒ‹morph.txt‚ğ—p‚¢‚Ü‚·
-// ‚ ‚ç‚©‚¶‚ß€”õ‚·‚éŒ`‘Ô‘f‚ÌØ‚èo‚µ‚É‚Ícutm_p.cƒvƒƒOƒ‰ƒ€‚ğg‚Á‚Ä‚­‚¾‚³‚¢D
+//      å­¦ç¿’ã«ã‚ˆã‚Šèªå½™ã‚’å¢—ã‚„ã™äººå·¥ç„¡èƒ½ãƒ—ãƒ­ã‚°ãƒ©ãƒ 
+//	å…ƒã«ãªã‚‹ã®ã¯ï¼Œå½¢æ…‹ç´ ã®é€£é–ã«ã‚ˆã‚Šæ–‡ã‚’ä½œæˆã™ã‚‹äººå·¥ç„¡èƒ½ãƒ—ãƒ­ã‚°ãƒ©ãƒ ai3.c
+// ãŠã‚ˆã³ï¼Œå½¢æ…‹ç´ åˆ‡ã‚Šå‡ºã—ãƒ—ãƒ­ã‚°ãƒ©ãƒ cutm_p.cãƒ—ãƒ­ã‚°ãƒ©ãƒ ã§ã™
+//	å½¢æ…‹ç´ ã®é€£é–ãŒæ ¼ç´ã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«morph.txtã‚’ç”¨ã„ã¾ã™
+// ã‚ã‚‰ã‹ã˜ã‚æº–å‚™ã™ã‚‹å½¢æ…‹ç´ ã®åˆ‡ã‚Šå‡ºã—ã«ã¯cutm_p.cãƒ—ãƒ­ã‚°ãƒ©ãƒ ã‚’ä½¿ã£ã¦ãã ã•ã„ï¼
 
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
 
-#define MAXNO 10000 //Œ`‘Ô‘f˜A½‚ÌÅ‘å”
-#define MAXLINE 48 //1s‚ÌÅ‘åƒoƒCƒg”
-#define FILENAME "morph.txt" //Œ`‘Ô‘f‚ªŠi”[‚³‚ê‚½ƒtƒ@ƒCƒ‹
+#define MAXNO 10000 //å½¢æ…‹ç´ é€£é–ã®æœ€å¤§æ•°
+#define MAXLINE 48 //1è¡Œã®æœ€å¤§ãƒã‚¤ãƒˆæ•°
+#define FILENAME "morph.txt" //å½¢æ…‹ç´ ãŒæ ¼ç´ã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«
 
 
-/*Œ`‘Ô‘fƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ*/
+/*å½¢æ…‹ç´ ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿*/
 int readmorph(char db[MAXNO][2][MAXLINE])
 {
  FILE *fp;
@@ -22,28 +22,28 @@ int readmorph(char db[MAXNO][2][MAXLINE])
  int i=0 ;
 
  if((fp=fopen(FILENAME,"r"))==NULL){
-  fprintf(stderr,"ƒGƒ‰[@ƒtƒ@ƒCƒ‹morph.txt‚ª‚ ‚è‚Ü‚¹‚ñ\n");
+  fprintf(stderr,"ã‚¨ãƒ©ãƒ¼ã€€ãƒ•ã‚¡ã‚¤ãƒ«morph.txtãŒã‚ã‚Šã¾ã›ã‚“\n");
   exit(1) ;
  }
  fgets(oldline,MAXLINE,fp) ;
- if(strchr(oldline,'\n')!=NULL)*strchr(oldline,'\n')='\0' ;//‰üsƒR[ƒh‚ğæ‚èœ‚­
+ if(strchr(oldline,'\n')!=NULL)*strchr(oldline,'\n')='\0' ;//æ”¹è¡Œã‚³ãƒ¼ãƒ‰ã‚’å–ã‚Šé™¤ã
  while(fgets(line,MAXLINE,fp)!=NULL){
-  if(strchr(line,'\n')!=NULL) *strchr(line,'\n')='\0' ;//‰üsƒR[ƒh‚ğæ‚èœ‚­
-  strncpy(db[i][0],oldline,MAXLINE) ;//Œ`‘Ô‘f‚ğƒRƒs[
-  strncpy(db[i][1],line,MAXLINE) ;//Œ`‘Ô‘f‚ğƒRƒs[
+  if(strchr(line,'\n')!=NULL) *strchr(line,'\n')='\0' ;//æ”¹è¡Œã‚³ãƒ¼ãƒ‰ã‚’å–ã‚Šé™¤ã
+  strncpy(db[i][0],oldline,MAXLINE) ;//å½¢æ…‹ç´ ã‚’ã‚³ãƒ”ãƒ¼
+  strncpy(db[i][1],line,MAXLINE) ;//å½¢æ…‹ç´ ã‚’ã‚³ãƒ”ãƒ¼
   strncpy(oldline,line,MAXLINE) ;
   ++i ;
   if(i>=MAXNO){
-   fprintf(stderr,"Œx@Œ`‘Ô‘f”‚ğ%dŒÂ‚É§ŒÀ‚µ‚Ü‚·\n",MAXNO);
+   fprintf(stderr,"è­¦å‘Šã€€å½¢æ…‹ç´ æ•°ã‚’%då€‹ã«åˆ¶é™ã—ã¾ã™\n",MAXNO);
    break ;
   }
  }
- /* ai3.c‚©‚ç‚Ì•ÏX“_*/
- fclose(fp) ;//ƒtƒ@ƒCƒ‹‚ğ•Â‚¶‚é
- /* •ÏX“_‚¨‚í‚è*/
- return i ;//Œ`‘Ô‘f‚ÌŒÂ”‚ğ•Ô‚·
+ /* ai3.cã‹ã‚‰ã®å¤‰æ›´ç‚¹*/
+ fclose(fp) ;//ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã‚‹
+ /* å¤‰æ›´ç‚¹ãŠã‚ã‚Š*/
+ return i ;//å½¢æ…‹ç´ ã®å€‹æ•°ã‚’è¿”ã™
 }
-/*ŠJn•¶š‚ª‰½‰ñŠÜ‚Ü‚ê‚é‚©”‚¦‚é*/
+/*é–‹å§‹æ–‡å­—ãŒä½•å›å«ã¾ã‚Œã‚‹ã‹æ•°ãˆã‚‹*/
 int findch(char *startch,char db[MAXNO][2][MAXLINE],int n) 
 {
  int i ;
@@ -53,7 +53,7 @@ int findch(char *startch,char db[MAXNO][2][MAXLINE],int n)
  }
  return no ;
 }
-/*numˆÈ‰º‚Ì—”‚ğƒZƒbƒg*/
+/*numä»¥ä¸‹ã®ä¹±æ•°ã‚’ã‚»ãƒƒãƒˆ*/
 int setrnd(int num)
 {
  int rndno ;
@@ -62,20 +62,20 @@ int setrnd(int num)
 
 }
 
-/*Ÿ‚Ì•¶š‚ğŒ`‘Ô‘f‚cB‚É‚æ‚èƒ‰ƒ“ƒ_ƒ€‚ÉƒZƒbƒg*/
+/*æ¬¡ã®æ–‡å­—ã‚’å½¢æ…‹ç´ ï¼¤Bã«ã‚ˆã‚Šãƒ©ãƒ³ãƒ€ãƒ ã«ã‚»ãƒƒãƒˆ*/
 void setrndstr(char *startch,char db[MAXNO][2][MAXLINE],int n)
 {
  strncpy(startch,db[setrnd(n)][1],MAXLINE);
 }
 
-/*Ÿ‚Ì•¶š‚ğŒ`‘Ô‘f‚c‚a‚É‚æ‚èƒZƒbƒg*/
+/*æ¬¡ã®æ–‡å­—ã‚’å½¢æ…‹ç´ ï¼¤ï¼¢ã«ã‚ˆã‚Šã‚»ãƒƒãƒˆ*/
 void setnext(char *startch,char db[MAXNO][2][MAXLINE],int n,int num) 
 {
  int i ;
  int no=-1 ;
  int point ;
  
- point=setrnd(num) ;//numˆÈ‰º‚Ì—”‚ğƒZƒbƒg
+ point=setrnd(num) ;//numä»¥ä¸‹ã®ä¹±æ•°ã‚’ã‚»ãƒƒãƒˆ
  for(i=0;i<n;++i){
   if(strncmp(startch,db[i][0],MAXLINE)==0) ++ no ;
   if(no==point){
@@ -86,29 +86,29 @@ void setnext(char *startch,char db[MAXNO][2][MAXLINE],int n,int num)
 }
 
 
-/*•¶‚Ì¶¬*/
+/*æ–‡ã®ç”Ÿæˆ*/
 void generates(char *startch,char db[MAXNO][2][MAXLINE],int n)
 {
  int i,num ;
 
- /*ŠJn•¶š—ñ‚Ìo—Í*/
+ /*é–‹å§‹æ–‡å­—åˆ—ã®å‡ºåŠ›*/
  printf("%s",startch) ;
-  /*‹å“_‚ªo‚é‚Ü‚ÅŒJ‚è•Ô‚µ*/
+  /*å¥ç‚¹ãŒå‡ºã‚‹ã¾ã§ç¹°ã‚Šè¿”ã—*/
  do{
-  /*ŠJn•¶š‚ª‰½‰ñŠÜ‚Ü‚ê‚é‚©”‚¦‚é*/
+  /*é–‹å§‹æ–‡å­—ãŒä½•å›å«ã¾ã‚Œã‚‹ã‹æ•°ãˆã‚‹*/
   num=findch(startch,db,n) ;
-  /*‚»‚Ì’†‚©‚çƒ‰ƒ“ƒ_ƒ€‚É•¶š—ñ‚ğ‘I‚Ô*/
+  /*ãã®ä¸­ã‹ã‚‰ãƒ©ãƒ³ãƒ€ãƒ ã«æ–‡å­—åˆ—ã‚’é¸ã¶*/
   if(num!=0)
     setnext(startch,db,n,num) ;
   else
     setrndstr(startch,db,n) ;
-  /*•¶š‚ğo—Í‚·‚é*/
+  /*æ–‡å­—ã‚’å‡ºåŠ›ã™ã‚‹*/
   printf("%s",startch) ;
- }while((strncmp(startch,"D",2)!=0)&&(strncmp(startch,"B",2)!=0)) ;
+ }while((strncmp(startch,"ï¼",2)!=0)&&(strncmp(startch,"ã€‚",2)!=0)) ;
  printf("\n") ;
 }
 
-/*Š¿š‚©‚»‚êˆÈŠO‚©‚Ì”»•Ê*/
+/*æ¼¢å­—ã‹ãã‚Œä»¥å¤–ã‹ã®åˆ¤åˆ¥*/
 int iskanji(char ch)
 {
  int d ;
@@ -117,19 +117,19 @@ int iskanji(char ch)
  else return 0 ;
 }
 
-/* ŠJn•¶š—ñ‚ÌŒˆ’è*/
+/* é–‹å§‹æ–‡å­—åˆ—ã®æ±ºå®š*/
 void setstartch(char *startch,char *line)
 {
  unsigned int i,j;
  
- /*Š¿šˆÈŠO‚Ì“Ç‚İ”ò‚Î‚µ*/
+ /*æ¼¢å­—ä»¥å¤–ã®èª­ã¿é£›ã°ã—*/
  for(i=0;i<strlen(line);i+=2)
   if(iskanji(line[i])==1) break ;
- if(i==strlen(line)){//Š¿š‚ªŒ©‚Â‚©‚ç‚È‚¢
-  strncpy(startch,"lH’m”\",MAXLINE) ;
+ if(i==strlen(line)){//æ¼¢å­—ãŒè¦‹ã¤ã‹ã‚‰ãªã„
+  strncpy(startch,"äººå·¥çŸ¥èƒ½",MAXLINE) ;
  }
  else{
- /*Š¿š‚Ì’Šo*/
+ /*æ¼¢å­—ã®æŠ½å‡º*/
  j=0 ;
  while((iskanji(line[i])==1)&&(line[i]!='\0')){
   startch[j++]=line[i++] ;
@@ -139,9 +139,9 @@ void setstartch(char *startch,char *line)
  }
 }
 
-/* ˆÈ‰ºCai3.c‚©‚ç‚Ì•ÏX“_*/
-/*ˆÈ‰º‚Ícutm_p.cƒvƒƒOƒ‰ƒ€‚©‚ç‚ÌŠÖ”‚Ì’Ç‰Á*/
-/*ƒJƒ^ƒJƒi‚©‚»‚êˆÈŠO‚©‚Ì”»•Ê*/
+/* ä»¥ä¸‹ï¼Œai3.cã‹ã‚‰ã®å¤‰æ›´ç‚¹*/
+/*ä»¥ä¸‹ã¯cutm_p.cãƒ—ãƒ­ã‚°ãƒ©ãƒ ã‹ã‚‰ã®é–¢æ•°ã®è¿½åŠ */
+/*ã‚«ã‚¿ã‚«ãƒŠã‹ãã‚Œä»¥å¤–ã‹ã®åˆ¤åˆ¥*/
 int iskatakana(char ch1,char ch2)
 {
  int d1,d2 ;
@@ -150,114 +150,114 @@ int iskatakana(char ch1,char ch2)
  if((d1==0x83)&&(d2>=40)&&(d2<=0x96)) return 1 ;
  else return 0 ;
 }
-/*ší‚Ìİ’è*/
+/*å­—ç¨®ã®è¨­å®š*/
 int typeset(char ch1,char ch2)
 {
- if(iskanji(ch1)) return 0 ;//Š¿š‚Í‚O
- else if(iskatakana(ch1,ch2)) return 1 ;//ƒJƒ^ƒJƒi‚Í‚P
- else return 2 ;//‚»‚Ì‘¼‚Í‚Q
+ if(iskanji(ch1)) return 0 ;//æ¼¢å­—ã¯ï¼
+ else if(iskatakana(ch1,ch2)) return 1 ;//ã‚«ã‚¿ã‚«ãƒŠã¯ï¼‘
+ else return 2 ;//ãã®ä»–ã¯ï¼’
 }
-/*‹å“Ç“_‚ÌŒŸo*/
+/*å¥èª­ç‚¹ã®æ¤œå‡º*/
 int ispunct(char *ch)
 {
- if((strncmp(ch,"D",2)==0)
-  ||(strncmp(ch,"B",2)==0)
-  ||(strncmp(ch,"C",2)==0)
-  ||(strncmp(ch,"A",2)==0)
-  ) return 1;//‹å“Ç“_‚È‚ç‚P
+ if((strncmp(ch,"ï¼",2)==0)
+  ||(strncmp(ch,"ã€‚",2)==0)
+  ||(strncmp(ch,"ï¼Œ",2)==0)
+  ||(strncmp(ch,"ã€",2)==0)
+  ) return 1;//å¥èª­ç‚¹ãªã‚‰ï¼‘
   else return 0 ;
 }
-/*‘SŠp•¶š‚Ì‚İæ‚èo‚·*/
+/*å…¨è§’æ–‡å­—ã®ã¿å–ã‚Šå‡ºã™*/
 void getwidechar(char *t,char *s,int n)
 {
- int in=0;//“ü—Íƒf[ƒ^‚Ìƒ|ƒCƒ“ƒ^
- int out=0 ;//o—Íƒf[ƒ^‚Ìƒ|ƒCƒ“ƒ^
+ int in=0;//å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã®ãƒã‚¤ãƒ³ã‚¿
+ int out=0 ;//å‡ºåŠ›ãƒ‡ãƒ¼ã‚¿ã®ãƒã‚¤ãƒ³ã‚¿
  int d;
  while(in<n){
   d=(unsigned char)s[in] ;
-  if(((d>0x7F)&&(d<0xA0))||(d>0xDF)&&(d<0xF0)){//‚QƒoƒCƒg•¶š
+  if(((d>0x7F)&&(d<0xA0))||(d>0xDF)&&(d<0xF0)){//ï¼’ãƒã‚¤ãƒˆæ–‡å­—
     t[out++]=s[in++];
     t[out++]=s[in++];
   }
   else ++in ;
  }
- t[out]='\0' ;//•¶š—ñ‚ÌI’[
+ t[out]='\0' ;//æ–‡å­—åˆ—ã®çµ‚ç«¯
 }
-/*‚±‚±‚Ü‚Å‚Ícutm_p.cƒvƒƒOƒ‰ƒ€‚ÌŠÖ”‚Ì’Ç‰Á*/
+/*ã“ã“ã¾ã§ã¯cutm_p.cãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®é–¢æ•°ã®è¿½åŠ */
 
-/*Œ`‘Ô‘f‚ÌØ‚èo‚µ*/
-/*‚±‚ÌŠÖ”‚ÍCcutm_p.cƒvƒƒOƒ‰ƒ€‚Ì“¯–¼‚ÌŠÖ”‚ğ‰ü‘¢‚µ‚½‚à‚Ì‚Å‚·*/
+/*å½¢æ…‹ç´ ã®åˆ‡ã‚Šå‡ºã—*/
+/*ã“ã®é–¢æ•°ã¯ï¼Œcutm_p.cãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®åŒåã®é–¢æ•°ã‚’æ”¹é€ ã—ãŸã‚‚ã®ã§ã™*/
 void outputmorph(char *target,FILE *fp) 
 {
  int i=0 ;
- int now,last;//Š¿š(0)EƒJƒ^ƒJƒi(1)E‚»‚Ì‘¼(2)‚Ì•Ê
+ int now,last;//æ¼¢å­—(0)ãƒ»ã‚«ã‚¿ã‚«ãƒŠ(1)ãƒ»ãã®ä»–(2)ã®åˆ¥
  last=typeset(target[i],target[i+1]) ;
  while((target[i]!='\0')&& (i<MAXLINE)){
-  if(ispunct(&(target[i]))==0){//‹å“Ç“_‚Å‚Í‚È‚¢
-   /*•¶“à‚Ìˆ—*/
+  if(ispunct(&(target[i]))==0){//å¥èª­ç‚¹ã§ã¯ãªã„
+   /*æ–‡å†…ã®å‡¦ç†*/
    now=typeset(target[i],target[i+1]) ;
-   if(now!=last) {//ší‚ª•Ï‚í‚Á‚Ä‚¢‚é
-    putc('\n',fp) ;//‹æØ‚è‚Ì‰üs‚ğo—Í
+   if(now!=last) {//å­—ç¨®ãŒå¤‰ã‚ã£ã¦ã„ã‚‹
+    putc('\n',fp) ;//åŒºåˆ‡ã‚Šã®æ”¹è¡Œã‚’å‡ºåŠ›
     last=now ;
    }
    putc(target[i++],fp) ;
    putc(target[i++],fp) ;
   }
-  else{//‹å“Ç“_
-  /*•¶––‚È‚Ç‚Ìˆ—*/
-   putc('\n',fp) ;//‹æØ‚è‚Ì‰üs‚ğo—Í
+  else{//å¥èª­ç‚¹
+  /*æ–‡æœ«ãªã©ã®å‡¦ç†*/
+   putc('\n',fp) ;//åŒºåˆ‡ã‚Šã®æ”¹è¡Œã‚’å‡ºåŠ›
    putc(target[i++],fp) ;
    putc(target[i++],fp) ;
-   putc('\n',fp) ;//‹æØ‚è‚Ì‰üs‚ğo—Í
+   putc('\n',fp) ;//åŒºåˆ‡ã‚Šã®æ”¹è¡Œã‚’å‡ºåŠ›
    last=typeset(target[i],target[i+1]) ;   
   } 
  }
 }
 
-/*—˜—pÒ‚Ì“ü—Í‚©‚çŒ`‘Ô‘fƒtƒ@ƒCƒ‹‚ğXV‚·‚é*/
+/*åˆ©ç”¨è€…ã®å…¥åŠ›ã‹ã‚‰å½¢æ…‹ç´ ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ›´æ–°ã™ã‚‹*/
 void addmorph(char line[])
 {
  FILE *fp;
  char target[MAXLINE];
 
  if((fp=fopen(FILENAME,"a"))==NULL){
-  fprintf(stderr,"ƒGƒ‰[@ƒtƒ@ƒCƒ‹morph.txt‚ÌƒI[ƒvƒ“‚É¸”s‚µ‚Ü‚µ‚½\n");
+  fprintf(stderr,"ã‚¨ãƒ©ãƒ¼ã€€ãƒ•ã‚¡ã‚¤ãƒ«morph.txtã®ã‚ªãƒ¼ãƒ—ãƒ³ã«å¤±æ•—ã—ã¾ã—ãŸ\n");
   exit(1) ;
  }
- /*‘SŠp•¶š‚Ì‚İæ‚èo‚·*/
+ /*å…¨è§’æ–‡å­—ã®ã¿å–ã‚Šå‡ºã™*/
  getwidechar(target,line,strlen(line)) ;
- outputmorph(target,fp);//Œ`‘Ô‘f‚Ì’Ç‰Á
+ outputmorph(target,fp);//å½¢æ…‹ç´ ã®è¿½åŠ 
  fclose(fp) ;
 }
-/*ˆÈã‚ÅCai3.cƒvƒƒOƒ‰ƒ€‚©‚ç‚Ì•ÏX“_I‚í‚è*/
+/*ä»¥ä¸Šã§ï¼Œai3.cãƒ—ãƒ­ã‚°ãƒ©ãƒ ã‹ã‚‰ã®å¤‰æ›´ç‚¹çµ‚ã‚ã‚Š*/
  
 int main()
 {
- char line[MAXLINE] ;//“ü—Íƒoƒbƒtƒ@
- char db[MAXNO][2][MAXLINE] ;//Œ`‘Ô‘f‚Ìƒf[ƒ^ƒx[ƒX
- int n ;//Œ`‘Ô‘f‚ÌŒÂ”
- char startch[MAXLINE];//ŠJn•¶š
+ char line[MAXLINE] ;//å…¥åŠ›ãƒãƒƒãƒ•ã‚¡
+ char db[MAXNO][2][MAXLINE] ;//å½¢æ…‹ç´ ã®ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹
+ int n ;//å½¢æ…‹ç´ ã®å€‹æ•°
+ char startch[MAXLINE];//é–‹å§‹æ–‡å­—
  
- /*—”‚Ì‰Šú‰»*/
+ /*ä¹±æ•°ã®åˆæœŸåŒ–*/
  srand(65535) ;
 
- /*ƒI[ƒvƒjƒ“ƒOƒƒbƒZ[ƒW*/
- printf("‚³‚­‚çFƒƒbƒZ[ƒW‚ğ‚Ç‚¤‚¼\n");
- printf("‚ ‚È‚½F");
- /*‰ï˜b‚µ‚Ü‚µ‚å‚¤*/
+ /*ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸*/
+ printf("ã•ãã‚‰ï¼šãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’ã©ã†ã\n");
+ printf("ã‚ãªãŸï¼š");
+ /*ä¼šè©±ã—ã¾ã—ã‚‡ã†*/
  while(fgets(line,MAXLINE-1,stdin)!=NULL){
-	 /* ai3.c‚©‚ç‚Ì•ÏX“_*/
-	 addmorph(line) ;//—˜—pÒ‚Ì“ü—Í‚É‚æ‚èŒ`‘Ô‘fƒtƒ@ƒCƒ‹‚ğXV‚·‚é
-  /*Œ`‘Ô‘fƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ*/
+	 /* ai3.cã‹ã‚‰ã®å¤‰æ›´ç‚¹*/
+	 addmorph(line) ;//åˆ©ç”¨è€…ã®å…¥åŠ›ã«ã‚ˆã‚Šå½¢æ…‹ç´ ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ›´æ–°ã™ã‚‹
+  /*å½¢æ…‹ç´ ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿*/
   n=readmorph(db) ;
-  /*•ÏX“_I‚í‚è*/
-  printf("‚³‚­‚çF");
+  /*å¤‰æ›´ç‚¹çµ‚ã‚ã‚Š*/
+  printf("ã•ãã‚‰ï¼š");
   setstartch(startch,line) ;
   generates(startch,db,n) ;
-  printf("‚ ‚È‚½F");
+  printf("ã‚ãªãŸï¼š");
  }
- /*ƒGƒ“ƒfƒBƒ“ƒOƒƒbƒZ[ƒW*/
- printf("‚³‚­‚çF‚Î‚¢‚Î`‚¢\n");
+ /*ã‚¨ãƒ³ãƒ‡ã‚£ãƒ³ã‚°ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸*/
+ printf("ã•ãã‚‰ï¼šã°ã„ã°ã€œã„\n");
  return 0 ;
 }
 

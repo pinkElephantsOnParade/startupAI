@@ -1,92 +1,92 @@
 //	makesnet.c
-//	ˆÓ–¡ƒlƒbƒgƒ[ƒN‚Ìì¬
-//	ƒeƒLƒXƒgƒf[ƒ^‚©‚çˆÓ–¡ƒlƒbƒgƒ[ƒN‚ğì‚è‚Ü‚·
-// Œê‚Ì•À‚Ñ‚ğ‹Lq‚µ‚½ƒtƒ@ƒCƒ‹ kk.txt‚ª•K—v‚Å‚·
+//	æ„å‘³ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã®ä½œæˆ
+//	ãƒ†ã‚­ã‚¹ãƒˆãƒ‡ãƒ¼ã‚¿ã‹ã‚‰æ„å‘³ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã‚’ä½œã‚Šã¾ã™
+// èªã®ä¸¦ã³ã‚’è¨˜è¿°ã—ãŸãƒ•ã‚¡ã‚¤ãƒ« kk.txtãŒå¿…è¦ã§ã™
 
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#define MAXNUM 4096 //ˆÓ–¡ƒlƒbƒgƒ[ƒN‚ÌÅ‘åŒÂ”
-#define MAXLINE 64 //‚P•¶‚ÌÅ‘å’·‚³
-#define NOPOS -1 //’Tõ¸”s‚Ìê‡‚Ì’l
-#define FILENAME  "kk.txt" //“Ç‚İ‚İ‘ÎÛƒtƒ@ƒCƒ‹
+#define MAXNUM 4096 //æ„å‘³ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã®æœ€å¤§å€‹æ•°
+#define MAXLINE 64 //ï¼‘æ–‡ã®æœ€å¤§é•·ã•
+#define NOPOS -1 //æ¢ç´¢å¤±æ•—ã®å ´åˆã®å€¤
+#define FILENAME  "kk.txt" //èª­ã¿è¾¼ã¿å¯¾è±¡ãƒ•ã‚¡ã‚¤ãƒ«
 
-/*ƒeƒLƒXƒg‚ğ“Ç‚İ‚Ş*/
+/*ãƒ†ã‚­ã‚¹ãƒˆã‚’èª­ã¿è¾¼ã‚€*/
 int getsource(char semnet[MAXNUM][2][MAXLINE] )
 {
  int numsnet=0 ;
- char line[MAXLINE] ; //“Ç‚İ‚İ—pƒoƒbƒtƒ@
+ char line[MAXLINE] ; //èª­ã¿è¾¼ã¿ç”¨ãƒãƒƒãƒ•ã‚¡
  FILE *fp;
  
  if((fp=fopen(FILENAME,"r"))==NULL){
-  fprintf(stderr,"ƒGƒ‰[@ƒtƒ@ƒCƒ‹%s‚ª‚ ‚è‚Ü‚¹‚ñ\n",FILENAME);
+  fprintf(stderr,"ã‚¨ãƒ©ãƒ¼ã€€ãƒ•ã‚¡ã‚¤ãƒ«%sãŒã‚ã‚Šã¾ã›ã‚“\n",FILENAME);
   exit(1) ;
  }
- /*“Ç‚İ‚İˆ—*/
+ /*èª­ã¿è¾¼ã¿å‡¦ç†*/
  while(fscanf(fp,"%s",line)!=EOF){
-  strncpy(semnet[numsnet][0],line,MAXLINE) ;//u`‚Ív‚É‚ ‚½‚é•”•ª
+  strncpy(semnet[numsnet][0],line,MAXLINE) ;//ã€Œã€œã¯ã€ã«ã‚ãŸã‚‹éƒ¨åˆ†
   if(fscanf(fp,"%s",line)!=EOF){
-   strncpy(semnet[numsnet][1],line,MAXLINE) ;//u`Cv‚É‚ ‚½‚é•”•ª
+   strncpy(semnet[numsnet][1],line,MAXLINE) ;//ã€Œã€œï¼Œã€ã«ã‚ãŸã‚‹éƒ¨åˆ†
   }
-  else break ;//ÅŒã‚É1ŒÂ‚ ‚Ü‚Á‚½ê‡
+  else break ;//æœ€å¾Œã«1å€‹ã‚ã¾ã£ãŸå ´åˆ
   ++numsnet ;
-  if(numsnet>=MAXNUM){//ƒlƒbƒgƒ[ƒN”‚ªãŒÀ‚ğ’´‚¦‚Ä‚¢‚é
+  if(numsnet>=MAXNUM){//ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯æ•°ãŒä¸Šé™ã‚’è¶…ãˆã¦ã„ã‚‹
 	  --numsnet ;
-	  printf("Œx@ˆÓ–¡ƒlƒbƒgƒ[ƒN‚Ì”‚ğ%d‚É§ŒÀ‚µ‚Ü‚µ‚½\n",numsnet) ;
+	  printf("è­¦å‘Šã€€æ„å‘³ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã®æ•°ã‚’%dã«åˆ¶é™ã—ã¾ã—ãŸ\n",numsnet) ;
 	  break ;
 	 }
  }
  return numsnet ;
 }
-/*ˆÓ–¡ƒlƒbƒgƒ[ƒN‚Ì’Tõ*/
+/*æ„å‘³ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã®æ¢ç´¢*/
 int searchword(char semnet[MAXNUM][2][MAXLINE],int numsnet,char line[],int flag[])
 {
 	int i ;
 	for(i=0;i<numsnet;++i){
-  if((strcmp(semnet[i][0],line)==0)&&(flag[i]==0)){//Œ©‚Â‚¯‚½
-   flag[i]=1 ;//2‰ñg‚í‚È‚¢‚æ‚¤‚É‚·‚é
+  if((strcmp(semnet[i][0],line)==0)&&(flag[i]==0)){//è¦‹ã¤ã‘ãŸ
+   flag[i]=1 ;//2å›ä½¿ã‚ãªã„ã‚ˆã†ã«ã™ã‚‹
 	  break ;
 	 }
  }
- if(i>=numsnet) i=NOPOS ;//Œ©‚Â‚©‚ç‚È‚©‚Á‚½
+ if(i>=numsnet) i=NOPOS ;//è¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸ
 		
  return i ;
 }
 
 
-/* ˜A‘z‚Ìˆ—*/
+/* é€£æƒ³ã®å‡¦ç†*/
 void searchsnet(char semnet[MAXNUM][2][MAXLINE],int numsnet,char line[])
 {
 	int pos ;
 	int i ;
-	int flag[MAXNUM] ;//2“xg‚í‚È‚¢‚½‚ß‚Ìƒtƒ‰ƒO
+	int flag[MAXNUM] ;//2åº¦ä½¿ã‚ãªã„ãŸã‚ã®ãƒ•ãƒ©ã‚°
 
-	for(i=0;i<MAXNUM;++i) flag[i]=0 ;//flag[]‚Ì‰Šú‰»
+	for(i=0;i<MAXNUM;++i) flag[i]=0 ;//flag[]ã®åˆæœŸåŒ–
  while((pos=searchword(semnet,numsnet,line,flag))!=NOPOS){
- 	printf("%s‚Í%sC\n",line,semnet[pos][1]) ;//˜A‘z‚Ìo—Í
+ 	printf("%sã¯%sï¼Œ\n",line,semnet[pos][1]) ;//é€£æƒ³ã®å‡ºåŠ›
 	 strncpy(line,semnet[pos][1],MAXLINE) ;
  }
- printf("%s‚ÍEEE‚í‚©‚ç‚È‚¢I\n",line) ;//Œ©‚Â‚©‚ç‚È‚¢‚Ì‚ÅI—¹
+ printf("%sã¯ãƒ»ãƒ»ãƒ»ã‚ã‹ã‚‰ãªã„ï¼\n",line) ;//è¦‹ã¤ã‹ã‚‰ãªã„ã®ã§çµ‚äº†
 }
 
 int main()
 {
- char semnet[MAXNUM][2][MAXLINE] ;//ˆÓ–¡ƒlƒbƒgƒ[ƒN
- int numsnet ;//ˆÓ–¡ƒlƒbƒgƒ[ƒN‚Ì”
- char line[MAXLINE] ;//“ü—Íƒoƒbƒtƒ@
+ char semnet[MAXNUM][2][MAXLINE] ;//æ„å‘³ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯
+ int numsnet ;//æ„å‘³ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã®æ•°
+ char line[MAXLINE] ;//å…¥åŠ›ãƒãƒƒãƒ•ã‚¡
 
- /*ƒeƒLƒXƒg‚ğ“Ç‚İ‚Ş*/
+ /*ãƒ†ã‚­ã‚¹ãƒˆã‚’èª­ã¿è¾¼ã‚€*/
  numsnet=getsource(semnet) ;
- printf("%dŒÂ‚ÌˆÓ–¡ƒlƒbƒgƒ[ƒN‚ğ“Ç‚İ‚İ‚Ü‚µ‚½\n",numsnet) ;
+ printf("%då€‹ã®æ„å‘³ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã‚’èª­ã¿è¾¼ã¿ã¾ã—ãŸ\n",numsnet) ;
 
- /*ˆÓ–¡ƒlƒbƒgƒ[ƒN‚ğŒŸõ‚·‚é*/
- printf("˜A‘z‚ğŠJn‚·‚é’PŒê‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢D\n");
- /*˜A‘z‚µ‚Ü‚µ‚å‚¤*/
+ /*æ„å‘³ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã‚’æ¤œç´¢ã™ã‚‹*/
+ printf("é€£æƒ³ã‚’é–‹å§‹ã™ã‚‹å˜èªã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ï¼\n");
+ /*é€£æƒ³ã—ã¾ã—ã‚‡ã†*/
  while(scanf("%s",line)!=EOF){
   searchsnet(semnet,numsnet,line) ;
-  printf("˜A‘z‚ğŠJn‚·‚éŸ‚Ì’PŒê‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢D\n");
+  printf("é€£æƒ³ã‚’é–‹å§‹ã™ã‚‹æ¬¡ã®å˜èªã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ï¼\n");
  }
- printf("ˆ—‚ğI‚í‚è‚Ü‚·D\n");
+ printf("å‡¦ç†ã‚’çµ‚ã‚ã‚Šã¾ã™ï¼\n");
 
  return 0 ;
 }

@@ -1,28 +1,28 @@
 //      ai5.c
-//	ƒvƒƒ_ƒNƒVƒ‡ƒ“ƒ‹[ƒ‹‚ğ—p‚¢‚½lH–³”\
-//      ƒvƒƒ_ƒNƒVƒ‡ƒ“ƒ‹[ƒ‹‚ğ‹Lq‚µ‚½ƒtƒ@ƒCƒ‹ rule.txt‚ª•K—v‚Å‚·
+//	ãƒ—ãƒ­ãƒ€ã‚¯ã‚·ãƒ§ãƒ³ãƒ«ãƒ¼ãƒ«ã‚’ç”¨ã„ãŸäººå·¥ç„¡èƒ½
+//      ãƒ—ãƒ­ãƒ€ã‚¯ã‚·ãƒ§ãƒ³ãƒ«ãƒ¼ãƒ«ã‚’è¨˜è¿°ã—ãŸãƒ•ã‚¡ã‚¤ãƒ« rule.txtãŒå¿…è¦ã§ã™
 
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#define MAXNO 32 //ƒvƒƒ_ƒNƒVƒ‡ƒ“ƒ‹[ƒ‹‚ÌÅ‘åŒÂ”
-#define MAXSTR 64 //•¶š—ñ‚ÌÅ‘å’·‚³
-#define MAXLINE 256 //1s‚Ì‚ÌÅ‘å’·‚³
-#define NORULE -1//ƒ‹[ƒ‹‚Éƒ}ƒbƒ`‚µ‚È‚¢ê‡‚Ì–ß‚è’l
+#define MAXNO 32 //ãƒ—ãƒ­ãƒ€ã‚¯ã‚·ãƒ§ãƒ³ãƒ«ãƒ¼ãƒ«ã®æœ€å¤§å€‹æ•°
+#define MAXSTR 64 //æ–‡å­—åˆ—ã®æœ€å¤§é•·ã•
+#define MAXLINE 256 //1è¡Œã®ã®æœ€å¤§é•·ã•
+#define NORULE -1//ãƒ«ãƒ¼ãƒ«ã«ãƒãƒƒãƒã—ãªã„å ´åˆã®æˆ»ã‚Šå€¤
 
-#define FILENAME  "rule.txt" //“Ç‚İ‚İ‘ÎÛƒtƒ@ƒCƒ‹
+#define FILENAME  "rule.txt" //èª­ã¿è¾¼ã¿å¯¾è±¡ãƒ•ã‚¡ã‚¤ãƒ«
 
-/*@ƒvƒƒ_ƒNƒVƒ‡ƒ“ƒ‹[ƒ‹‚ğŠi”[‚·‚é\‘¢‘Ì*/
+/*ã€€ãƒ—ãƒ­ãƒ€ã‚¯ã‚·ãƒ§ãƒ³ãƒ«ãƒ¼ãƒ«ã‚’æ ¼ç´ã™ã‚‹æ§‹é€ ä½“*/
 struct prule{
- char str1[MAXSTR] ;// ğŒ1
- char str2[MAXSTR] ;// ğŒ2
- char str3[MAXSTR] ;// ğŒ3
- char str4[MAXSTR] ;// ğŒ4
+ char str1[MAXSTR] ;// æ¡ä»¶1
+ char str2[MAXSTR] ;// æ¡ä»¶2
+ char str3[MAXSTR] ;// æ¡ä»¶3
+ char str4[MAXSTR] ;// æ¡ä»¶4
 
- char action[MAXSTR] ;//s“®i‰“š•¶š—ñj
+ char action[MAXSTR] ;//è¡Œå‹•ï¼ˆå¿œç­”æ–‡å­—åˆ—ï¼‰
 } ;
 
-/*numˆÈ‰º‚Ì—”‚ğƒZƒbƒg*/
+/*numä»¥ä¸‹ã®ä¹±æ•°ã‚’ã‚»ãƒƒãƒˆ*/
 int setrnd(int num)
 {
  int rndno ;
@@ -30,64 +30,64 @@ int setrnd(int num)
  return rndno ;
 }
 
-/* “ü—Í‚Éƒ}ƒbƒ`‚·‚éƒ‹[ƒ‹‚ğ’T‚·*/
+/* å…¥åŠ›ã«ãƒãƒƒãƒã™ã‚‹ãƒ«ãƒ¼ãƒ«ã‚’æ¢ã™*/
 int rulematch(struct prule rule[MAXNO] ,int i,char *line)
 {
 	if((strstr(line,rule[i].str1)!=NULL) &&
 	   (strstr(line,rule[i].str2)!=NULL) &&
 	   (strstr(line,rule[i].str3)!=NULL) &&
 	   (strstr(line,rule[i].str4)!=NULL))
-	  return 1 ;//‡’v‚µ‚½
+	  return 1 ;//åˆè‡´ã—ãŸ
 	else 
-	return  0;//‡’v‚µ‚È‚¢
+	return  0;//åˆè‡´ã—ãªã„
 }
 
-/* ‰“š•¶‚Ì¶¬ */
+/* å¿œç­”æ–‡ã®ç”Ÿæˆ */
 void answer(struct prule rule[MAXNO] ,int n,char *line)
 {
 	int i,limit,no=0,point=0 ;
 
-	for(i=0;i<n;++i){// ƒ}ƒbƒ`‚·‚éƒ‹[ƒ‹‚ÌŒÂ”‚ğ’²‚×‚é
+	for(i=0;i<n;++i){// ãƒãƒƒãƒã™ã‚‹ãƒ«ãƒ¼ãƒ«ã®å€‹æ•°ã‚’èª¿ã¹ã‚‹
    no+=rulematch(rule,i,line) ;
  }
 
- if(no==0) printf("‚Ç‚¤‚¼‘±‚¯‚Ä‚­‚¾‚³‚¢\n") ;//ƒ}ƒbƒ`‚·‚éƒ‹[ƒ‹‚ª‚È‚¢
- else{//­‚È‚­‚Æ‚à‚P‚Â‚Íƒ}ƒbƒ`‚·‚éƒ‹[ƒ‹‚ª‚ ‚é
-	 limit=setrnd(no) ;//‹£‡‰ğÁClimit”Ô–Ú‚Ìƒ‹[ƒ‹‚ğÌ—p
-	 for(i=0;i<n;++i){//ƒ‹[ƒ‹‚ğ‰ü‚ß‚ÄŒŸõ‚·‚é
+ if(no==0) printf("ã©ã†ãç¶šã‘ã¦ãã ã•ã„\n") ;//ãƒãƒƒãƒã™ã‚‹ãƒ«ãƒ¼ãƒ«ãŒãªã„
+ else{//å°‘ãªãã¨ã‚‚ï¼‘ã¤ã¯ãƒãƒƒãƒã™ã‚‹ãƒ«ãƒ¼ãƒ«ãŒã‚ã‚‹
+	 limit=setrnd(no) ;//ç«¶åˆè§£æ¶ˆï¼Œlimitç•ªç›®ã®ãƒ«ãƒ¼ãƒ«ã‚’æ¡ç”¨
+	 for(i=0;i<n;++i){//ãƒ«ãƒ¼ãƒ«ã‚’æ”¹ã‚ã¦æ¤œç´¢ã™ã‚‹
 		 if(rulematch(rule,i,line)==1){
-			 if(point==limit) break ;//limit”Ô–Ú‚Ì“K‡ƒ‹[ƒ‹‚ğ”­Œ©
+			 if(point==limit) break ;//limitç•ªç›®ã®é©åˆãƒ«ãƒ¼ãƒ«ã‚’ç™ºè¦‹
 			 ++point ;
 		 }
 		} 
-	 printf("%s\n",rule[i].action) ;//s“®i•Ô“š•¶‚Ìo—Íj
+	 printf("%s\n",rule[i].action) ;//è¡Œå‹•ï¼ˆè¿”ç­”æ–‡ã®å‡ºåŠ›ï¼‰
  }
 }
 
-/*ƒeƒLƒXƒg‚ğ“Ç‚İ‚Ş*/
+/*ãƒ†ã‚­ã‚¹ãƒˆã‚’èª­ã¿è¾¼ã‚€*/
 int readrule(struct prule rule[MAXNO] )
 {
  int n=0 ;
- char line[MAXSTR] ; //“Ç‚İ‚İ—pƒoƒbƒtƒ@
+ char line[MAXSTR] ; //èª­ã¿è¾¼ã¿ç”¨ãƒãƒƒãƒ•ã‚¡
  FILE *fp;
  
  if((fp=fopen(FILENAME,"r"))==NULL){
-  fprintf(stderr,"ƒGƒ‰[@ƒtƒ@ƒCƒ‹%s‚ª‚ ‚è‚Ü‚¹‚ñ\n",FILENAME);
+  fprintf(stderr,"ã‚¨ãƒ©ãƒ¼ã€€ãƒ•ã‚¡ã‚¤ãƒ«%sãŒã‚ã‚Šã¾ã›ã‚“\n",FILENAME);
   exit(1) ;
  }
- /*“Ç‚İ‚İˆ—*/
+ /*èª­ã¿è¾¼ã¿å‡¦ç†*/
  while(fgets(line,MAXLINE,fp)!=NULL){
 	 sscanf(line,"%s %s %s %s %s",rule[n].str1,rule[n].str2,
 	                  rule[n].str3,rule[n].str4,rule[n].action) ;
-	 if(strlen(rule[n].str1)>1){//­‚È‚­‚Æ‚àğŒ‚ª‚Ğ‚Æ‚ÂˆÈã‚ ‚é
+	 if(strlen(rule[n].str1)>1){//å°‘ãªãã¨ã‚‚æ¡ä»¶ãŒã²ã¨ã¤ä»¥ä¸Šã‚ã‚‹
  	 if(strcmp(rule[n].str2,"-")==0) strcpy(rule[n].str2,rule[n].str1) ;
 	  if(strcmp(rule[n].str3,"-")==0) strcpy(rule[n].str3,rule[n].str2) ;
 	  if(strcmp(rule[n].str4,"-")==0) strcpy(rule[n].str4,rule[n].str3) ;
   }
   ++n ;
-  if(n>=MAXNO){//ƒ‹[ƒ‹”‚ªãŒÀ‚ğ’´‚¦‚Ä‚¢‚é
+  if(n>=MAXNO){//ãƒ«ãƒ¼ãƒ«æ•°ãŒä¸Šé™ã‚’è¶…ãˆã¦ã„ã‚‹
 	  --n ;
-	  printf("Œx@ƒ‹[ƒ‹”‚ğ%d‚É§ŒÀ‚µ‚Ü‚µ‚½\n",n) ;
+	  printf("è­¦å‘Šã€€ãƒ«ãƒ¼ãƒ«æ•°ã‚’%dã«åˆ¶é™ã—ã¾ã—ãŸ\n",n) ;
 	  break ;
 	 }
  }
@@ -96,26 +96,26 @@ int readrule(struct prule rule[MAXNO] )
 
 int main()
 {
- char line[MAXLINE] ;//“ü—Íƒoƒbƒtƒ@
- struct prule rule[MAXNO] ;//ƒvƒƒ_ƒNƒVƒ‡ƒ“ƒ‹[ƒ‹
- int n ;//ƒ‹[ƒ‹‚Ì”
+ char line[MAXLINE] ;//å…¥åŠ›ãƒãƒƒãƒ•ã‚¡
+ struct prule rule[MAXNO] ;//ãƒ—ãƒ­ãƒ€ã‚¯ã‚·ãƒ§ãƒ³ãƒ«ãƒ¼ãƒ«
+ int n ;//ãƒ«ãƒ¼ãƒ«ã®æ•°
  
- /*—”‚Ì‰Šú‰»*/
+ /*ä¹±æ•°ã®åˆæœŸåŒ–*/
  srand(65535) ;
- /*ƒvƒƒ_ƒNƒVƒ‡ƒ“ƒ‹[ƒ‹ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ*/
+ /*ãƒ—ãƒ­ãƒ€ã‚¯ã‚·ãƒ§ãƒ³ãƒ«ãƒ¼ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿*/
  n=readrule(rule) ;
 
- /*ƒI[ƒvƒjƒ“ƒOƒƒbƒZ[ƒW*/
- printf("‚³‚­‚çF‚³‚ÄC‚Ç‚¤‚µ‚Ü‚µ‚½H\n");
- printf("‚ ‚È‚½F");
- /*‰ï˜b‚µ‚Ü‚µ‚å‚¤*/
+ /*ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸*/
+ printf("ã•ãã‚‰ï¼šã•ã¦ï¼Œã©ã†ã—ã¾ã—ãŸï¼Ÿ\n");
+ printf("ã‚ãªãŸï¼š");
+ /*ä¼šè©±ã—ã¾ã—ã‚‡ã†*/
  while(fgets(line,MAXLINE,stdin)!=NULL){
-  printf("‚³‚­‚çF");
-  answer(rule,n,line) ;//ƒvƒƒ_ƒNƒVƒ‡ƒ“ƒ‹[ƒ‹‚É‚æ‚é‰“š•¶¶¬
-  printf("‚ ‚È‚½F");
+  printf("ã•ãã‚‰ï¼š");
+  answer(rule,n,line) ;//ãƒ—ãƒ­ãƒ€ã‚¯ã‚·ãƒ§ãƒ³ãƒ«ãƒ¼ãƒ«ã«ã‚ˆã‚‹å¿œç­”æ–‡ç”Ÿæˆ
+  printf("ã‚ãªãŸï¼š");
  }
- /*ƒGƒ“ƒfƒBƒ“ƒOƒƒbƒZ[ƒW*/
- printf("‚³‚­‚çF‚»‚ê‚Å‚Í‚¨˜b‚ğI‚í‚è‚Ü‚µ‚å‚¤\n");
+ /*ã‚¨ãƒ³ãƒ‡ã‚£ãƒ³ã‚°ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸*/
+ printf("ã•ãã‚‰ï¼šãã‚Œã§ã¯ãŠè©±ã‚’çµ‚ã‚ã‚Šã¾ã—ã‚‡ã†\n");
  return 0 ;
 }
 

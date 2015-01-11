@@ -1,37 +1,37 @@
 //	make3gram.c
-//	3-gramƒf[ƒ^‚Ìì¬
-//	ƒeƒLƒXƒg‚©‚ç‘SŠpƒf[ƒ^‚Ì‚İ’Šo‚µ‚Ä3-gram‚ğì‚è‚Ü‚·
+//	3-gramãƒ‡ãƒ¼ã‚¿ã®ä½œæˆ
+//	ãƒ†ã‚­ã‚¹ãƒˆã‹ã‚‰å…¨è§’ãƒ‡ãƒ¼ã‚¿ã®ã¿æŠ½å‡ºã—ã¦3-gramã‚’ä½œã‚Šã¾ã™
 
 #include<stdio.h>
-#define MAX 65535*3 //192kƒoƒCƒg‚Ü‚Åˆ—‰Â”\
+#define MAX 65535*3 //192kãƒã‚¤ãƒˆã¾ã§å‡¦ç†å¯èƒ½
 
-/*ƒeƒLƒXƒg‚ğ“Ç‚İ‚Ş*/
+/*ãƒ†ã‚­ã‚¹ãƒˆã‚’èª­ã¿è¾¼ã‚€*/
 int getsource(char *s)
 {
- int n=0 ;//•¶š”‚ÌƒJƒEƒ“ƒ^
+ int n=0 ;//æ–‡å­—æ•°ã®ã‚«ã‚¦ãƒ³ã‚¿
 
  while((s[n++]=getchar())!=EOF) ;
  return n ;
 }
 
- /*‘SŠp•¶š‚Ì‚İæ‚èo‚·*/
+ /*å…¨è§’æ–‡å­—ã®ã¿å–ã‚Šå‡ºã™*/
 void getwidechar(char *t,char *s,int n)
 {
- int in=0;//“ü—Íƒf[ƒ^‚Ìƒ|ƒCƒ“ƒ^
- int out=0 ;//o—Íƒf[ƒ^‚Ìƒ|ƒCƒ“ƒ^
+ int in=0;//å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã®ãƒã‚¤ãƒ³ã‚¿
+ int out=0 ;//å‡ºåŠ›ãƒ‡ãƒ¼ã‚¿ã®ãƒã‚¤ãƒ³ã‚¿
  int d;
  while(in<n){
   d=(unsigned char)s[in] ;
-  if(((d>0x7F)&&(d<0xA0))||(d>0xDF)&&(d<0xF0)){//‚QƒoƒCƒg•¶š
+  if(((d>0x7F)&&(d<0xA0))||(d>0xDF)&&(d<0xF0)){//ï¼’ãƒã‚¤ãƒˆæ–‡å­—
     t[out++]=s[in++];
     t[out++]=s[in++];
   }
   else ++in ;
  }
- t[out]='\0' ;//•¶š—ñ‚ÌI’[
+ t[out]='\0' ;//æ–‡å­—åˆ—ã®çµ‚ç«¯
 }
 
- /*3-gram‚Ìo—Í*/
+ /*3-gramã®å‡ºåŠ›*/
 void outputtarget(char *target) 
 {
  int i=0 ;
@@ -48,17 +48,17 @@ void outputtarget(char *target)
 
 int main()
 {
- char source[MAX] ;//“ü—Íƒf[ƒ^
- char target[MAX] ;//‘SŠpƒf[ƒ^
- int numchar ;//“ü—Í•¶š”
+ char source[MAX] ;//å…¥åŠ›ãƒ‡ãƒ¼ã‚¿
+ char target[MAX] ;//å…¨è§’ãƒ‡ãƒ¼ã‚¿
+ int numchar ;//å…¥åŠ›æ–‡å­—æ•°
 
- /*ƒeƒLƒXƒg‚ğ“Ç‚İ‚Ş*/
+ /*ãƒ†ã‚­ã‚¹ãƒˆã‚’èª­ã¿è¾¼ã‚€*/
  numchar=getsource(source) ;
 
- /*‘SŠp•¶š‚Ì‚İæ‚èo‚·*/
+ /*å…¨è§’æ–‡å­—ã®ã¿å–ã‚Šå‡ºã™*/
  getwidechar(target,source,numchar) ;
 
- /*3-gram‚Ìo—Í*/
+ /*3-gramã®å‡ºåŠ›*/
  outputtarget(target) ;
 
  return 0 ;

@@ -1,15 +1,15 @@
 //	gens2.c
-//	‘‚«Š·‚¦‹K‘¥‚É‚æ‚é•¶‚Ì¶¬ƒvƒƒOƒ‰ƒ€‚»‚Ì2
-//	‘‚«Š·‚¦‹K‘¥B‚É]‚Á‚Ä•¶‚ğ¶¬‚µ‚Ü‚·
-//  ‘‚«Š·‚¦‹K‘¥B
-//		‹K‘¥‡@	<•¶>¨<–¼Œ‹å„ƒ“®Œ‹å„
-//@@@‹K‘¥‡A	<–¼Œ‹å>¨ƒŒ`—eŒ‹å„ƒ–¼Œ„‚Í
-//@@@‹K‘¥‡B	<–¼Œ‹å>¨ƒ–¼Œ„‚Í
-//@@@‹K‘¥‡C	<“®Œ‹å>¨ƒ“®Œ„
-//@@@‹K‘¥‡D	<“®Œ‹å>¨ƒŒ`—eŒ„
-//@@@‹K‘¥‡E	<“®Œ‹å>¨ƒŒ`—e“®Œ„
-//@@@‹K‘¥‡F	<Œ`—eŒ‹å>¨ƒŒ`—eŒ„ƒŒ`—eŒ‹å„
-//@@@‹K‘¥‡G	<Œ`—eŒ‹å>¨ƒŒ`—eŒ„
+//	æ›¸ãæ›ãˆè¦å‰‡ã«ã‚ˆã‚‹æ–‡ã®ç”Ÿæˆãƒ—ãƒ­ã‚°ãƒ©ãƒ ãã®2
+//	æ›¸ãæ›ãˆè¦å‰‡Bã«å¾“ã£ã¦æ–‡ã‚’ç”Ÿæˆã—ã¾ã™
+//  æ›¸ãæ›ãˆè¦å‰‡B
+//		è¦å‰‡	<æ–‡>â†’<åè©å¥ï¼ï¼œå‹•è©å¥ï¼
+//ã€€ã€€ã€€è¦å‰‡	<åè©å¥>â†’ï¼œå½¢å®¹è©å¥ï¼ï¼œåè©ï¼ã¯
+//ã€€ã€€ã€€è¦å‰‡	<åè©å¥>â†’ï¼œåè©ï¼ã¯
+//ã€€ã€€ã€€è¦å‰‡	<å‹•è©å¥>â†’ï¼œå‹•è©ï¼
+//ã€€ã€€ã€€è¦å‰‡	<å‹•è©å¥>â†’ï¼œå½¢å®¹è©ï¼
+//ã€€ã€€ã€€è¦å‰‡	<å‹•è©å¥>â†’ï¼œå½¢å®¹å‹•è©ï¼
+//ã€€ã€€ã€€è¦å‰‡	<å½¢å®¹è©å¥>â†’ï¼œå½¢å®¹è©ï¼ï¼œå½¢å®¹è©å¥ï¼
+//ã€€ã€€ã€€è¦å‰‡	<å½¢å®¹è©å¥>â†’ï¼œå½¢å®¹è©ï¼
 
 
 
@@ -18,12 +18,12 @@
 #include<string.h>
 #include<stdlib.h>
 
-#define NMAX 8192 //I’[‹L†€–Ú”‚ÌãŒÀ
-#define CHMAX 32  //I’[‹L†‚Ì’·‚³‚ÌãŒÀ
-#define NFILE "noun.txt"//–¼Œ‚ÌŠi”[‚³‚ê‚½ƒtƒ@ƒCƒ‹
-#define VFILE "verb.txt"//“®Œ‚ÌŠi”[‚³‚ê‚½ƒtƒ@ƒCƒ‹
-#define AFILE "adj.txt"//Œ`—eŒ‚ÌŠi”[‚³‚ê‚½ƒtƒ@ƒCƒ‹
-#define DFILE "adjv.txt"//Œ`—e“®Œ‚ÌŠi”[‚³‚ê‚½ƒtƒ@ƒCƒ‹
+#define NMAX 8192 //çµ‚ç«¯è¨˜å·é …ç›®æ•°ã®ä¸Šé™
+#define CHMAX 32  //çµ‚ç«¯è¨˜å·ã®é•·ã•ã®ä¸Šé™
+#define NFILE "noun.txt"//åè©ã®æ ¼ç´ã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«
+#define VFILE "verb.txt"//å‹•è©ã®æ ¼ç´ã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«
+#define AFILE "adj.txt"//å½¢å®¹è©ã®æ ¼ç´ã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«
+#define DFILE "adjv.txt"//å½¢å®¹å‹•è©ã®æ ¼ç´ã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«
 
 char nlist[NMAX][CHMAX]; int nnum;
 char vlist[NMAX][CHMAX]; int vnum;
@@ -36,54 +36,54 @@ void vp(void) ;
 void sentence(void) ;
 int setrnd(int num) ;
 
-/*‹K‘¥‡C<“®Œ‹å>¨<“®Œ> ‡D<“®Œ‹å>¨<Œ`—eŒ> ‡E<“®Œ‹å>¨<Œ`—e“®Œ>*/
+/*è¦å‰‡<å‹•è©å¥>â†’<å‹•è©> <å‹•è©å¥>â†’<å½¢å®¹è©> <å‹•è©å¥>â†’<å½¢å®¹å‹•è©>*/
 void vp()
 {
  int r ;
  r=setrnd(3) ;
- if(r==2){//‹K‘¥‡C
+ if(r==2){//è¦å‰‡
   printf("%s",vlist[setrnd(vnum)]) ;
  }
- else if(r==1){//‹K‘¥‡D
+ else if(r==1){//è¦å‰‡
   printf("%s",alist[setrnd(anum)]) ;
  }
- else{//‹K‘¥‡E
+ else{//è¦å‰‡
   printf("%s",dlist[setrnd(dnum)]) ;
  }
 }
 
-/*‹K‘¥‡F<Œ`—eŒ‹å>¨ƒŒ`—eŒ„ƒŒ`—eŒ‹å„ ‡G<Œ`—eŒ‹å>¨ƒŒ`—eŒ„*/
+/*è¦å‰‡<å½¢å®¹è©å¥>â†’ï¼œå½¢å®¹è©ï¼ï¼œå½¢å®¹è©å¥ï¼ <å½¢å®¹è©å¥>â†’ï¼œå½¢å®¹è©ï¼*/
 void ap()
 {
- if(setrnd(2)>0){//‹K‘¥‡F
+ if(setrnd(2)>0){//è¦å‰‡
   ap() ;
   printf("%s",alist[setrnd(vnum)]) ;
  }
- else{//‹K‘¥‡G
+ else{//è¦å‰‡
   printf("%s",alist[setrnd(vnum)]) ;
  }
 }
 
-/*‹K‘¥‡A<–¼Œ‹å>¨ƒŒ`—eŒ‹å„ƒ–¼Œ„‚Í@‹K‘¥‡B@<–¼Œ‹å>¨ƒ–¼Œ„‚Í*/
+/*è¦å‰‡<åè©å¥>â†’ï¼œå½¢å®¹è©å¥ï¼ï¼œåè©ï¼ã¯ã€€è¦å‰‡ã€€<åè©å¥>â†’ï¼œåè©ï¼ã¯*/
 void np()
 {
- if(setrnd(2)>0){//‹K‘¥‡A
+ if(setrnd(2)>0){//è¦å‰‡
   ap() ;
-  printf("%s‚Í",nlist[setrnd(nnum)]) ;
+  printf("%sã¯",nlist[setrnd(nnum)]) ;
  }
- else{//‹K‘¥‡B
-  printf("%s‚Í",nlist[setrnd(nnum)]) ;
+ else{//è¦å‰‡
+  printf("%sã¯",nlist[setrnd(nnum)]) ;
  } 
 }
 
-/*‹K‘¥‡@	<•¶>¨<–¼Œ‹å„ƒ“®Œ‹å„*/
+/*è¦å‰‡	<æ–‡>â†’<åè©å¥ï¼ï¼œå‹•è©å¥ï¼*/
 void sentence()
 {
- np() ;//–¼Œ‹å‚Ì¶¬
- vp() ;//“®Œ‹å‚Ì¶¬
+ np() ;//åè©å¥ã®ç”Ÿæˆ
+ vp() ;//å‹•è©å¥ã®ç”Ÿæˆ
 }
 
-/*I’[‹L†ƒŠƒXƒg‚Ì“Ç‚İ‚İ*/
+/*çµ‚ç«¯è¨˜å·ãƒªã‚¹ãƒˆã®èª­ã¿è¾¼ã¿*/
 int setlist(char list[NMAX][CHMAX],char *filename)
 {
  FILE *fp;
@@ -91,7 +91,7 @@ int setlist(char list[NMAX][CHMAX],char *filename)
  int i=0 ;
 
  if((fp=fopen(filename,"r"))==NULL){
-  fprintf(stderr,"ƒGƒ‰[@ƒtƒ@ƒCƒ‹%s‚ª‚ ‚è‚Ü‚¹‚ñ\n",filename);
+  fprintf(stderr,"ã‚¨ãƒ©ãƒ¼ã€€ãƒ•ã‚¡ã‚¤ãƒ«%sãŒã‚ã‚Šã¾ã›ã‚“\n",filename);
   exit(1) ;
  }
 
@@ -101,10 +101,10 @@ int setlist(char list[NMAX][CHMAX],char *filename)
   ++i ;
  }
  fclose(fp) ;
- return i ;//“ü—ÍŒÂ”‚ğ•Ô‚·
+ return i ;//å…¥åŠ›å€‹æ•°ã‚’è¿”ã™
 }
 
-/*num–¢–‚Ì—”‚ğƒZƒbƒg*/
+/*numæœªæº€ã®ä¹±æ•°ã‚’ã‚»ãƒƒãƒˆ*/
 int setrnd(int num)
 {
  int rndno ;
@@ -117,18 +117,18 @@ int main()
 {
  int i ;
  
- /*—”‚Ì‰Šú‰»*/
+ /*ä¹±æ•°ã®åˆæœŸåŒ–*/
  srand(65535) ;
- /*I’[‹L†ƒŠƒXƒg‚Ì“Ç‚İ‚İ*/
+ /*çµ‚ç«¯è¨˜å·ãƒªã‚¹ãƒˆã®èª­ã¿è¾¼ã¿*/
  nnum=setlist(nlist,NFILE) ;
  vnum=setlist(vlist,VFILE) ;
  anum=setlist(alist,AFILE) ;
  dnum=setlist(dlist,DFILE) ;
 
  for(i=0;i<50;++i){
-  /*•¶‚Ì¶¬*/
+  /*æ–‡ã®ç”Ÿæˆ*/
   sentence() ;
-  printf("D\n") ;
+  printf("ï¼\n") ;
 }
  return 0 ;
 }

@@ -1,38 +1,38 @@
 //	cutmorph.c
-//	ší‚ÉŠî‚Ã‚­Œ`‘Ô‘f‚ÌØ‚èo‚µ
-//	ƒeƒLƒXƒg‚©‚ç‘SŠpƒf[ƒ^‚Ì‚İ’Šo‚µ‚ÄŒ`‘Ô‘f‚ğØ‚èo‚µ‚Ü‚·
+//	å­—ç¨®ã«åŸºã¥ãå½¢æ…‹ç´ ã®åˆ‡ã‚Šå‡ºã—
+//	ãƒ†ã‚­ã‚¹ãƒˆã‹ã‚‰å…¨è§’ãƒ‡ãƒ¼ã‚¿ã®ã¿æŠ½å‡ºã—ã¦å½¢æ…‹ç´ ã‚’åˆ‡ã‚Šå‡ºã—ã¾ã™
 
 #include<stdio.h>
 #include<string.h>
-#define MAX 65535*3 //192kƒoƒCƒg‚Ü‚Åˆ—‰Â”\
+#define MAX 65535*3 //192kãƒã‚¤ãƒˆã¾ã§å‡¦ç†å¯èƒ½
 
-/*ƒeƒLƒXƒg‚ğ“Ç‚İ‚Ş*/
+/*ãƒ†ã‚­ã‚¹ãƒˆã‚’èª­ã¿è¾¼ã‚€*/
 int getsource(char *s)
 {
- int n=0 ;//•¶š”‚ÌƒJƒEƒ“ƒ^
+ int n=0 ;//æ–‡å­—æ•°ã®ã‚«ã‚¦ãƒ³ã‚¿
 
  while((s[n++]=getchar())!=EOF) ;
  return n ;
 }
 
- /*‘SŠp•¶š‚Ì‚İæ‚èo‚·*/
+ /*å…¨è§’æ–‡å­—ã®ã¿å–ã‚Šå‡ºã™*/
 void getwidechar(char *t,char *s,int n)
 {
- int in=0;//“ü—Íƒf[ƒ^‚Ìƒ|ƒCƒ“ƒ^
- int out=0 ;//o—Íƒf[ƒ^‚Ìƒ|ƒCƒ“ƒ^
+ int in=0;//å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã®ãƒã‚¤ãƒ³ã‚¿
+ int out=0 ;//å‡ºåŠ›ãƒ‡ãƒ¼ã‚¿ã®ãƒã‚¤ãƒ³ã‚¿
  int d;
  while(in<n){
   d=(unsigned char)s[in] ;
-  if(((d>0x7F)&&(d<0xA0))||(d>0xDF)&&(d<0xF0)){//‚QƒoƒCƒg•¶š
+  if(((d>0x7F)&&(d<0xA0))||(d>0xDF)&&(d<0xF0)){//ï¼’ãƒã‚¤ãƒˆæ–‡å­—
     t[out++]=s[in++];
     t[out++]=s[in++];
   }
   else ++in ;
  }
- t[out]='\0' ;//•¶š—ñ‚ÌI’[
+ t[out]='\0' ;//æ–‡å­—åˆ—ã®çµ‚ç«¯
 }
 
-/*Š¿š‚©‚»‚êˆÈŠO‚©‚Ì”»•Ê*/
+/*æ¼¢å­—ã‹ãã‚Œä»¥å¤–ã‹ã®åˆ¤åˆ¥*/
 int iskanji(char ch)
 {
  int d ;
@@ -40,7 +40,7 @@ int iskanji(char ch)
  if(d>=0x88) return 1 ;
  else return 0 ;
 }
-/*ƒJƒ^ƒJƒi‚©‚»‚êˆÈŠO‚©‚Ì”»•Ê*/
+/*ã‚«ã‚¿ã‚«ãƒŠã‹ãã‚Œä»¥å¤–ã‹ã®åˆ¤åˆ¥*/
 int iskatakana(char ch1,char ch2)
 {
  int d1,d2 ;
@@ -49,44 +49,44 @@ int iskatakana(char ch1,char ch2)
  if((d1==0x83)&&(d2>=40)&&(d2<=0x96)) return 1 ;
  else return 0 ;
 }
-/*ší‚Ìİ’è*/
+/*å­—ç¨®ã®è¨­å®š*/
 int typeset(char ch1,char ch2)
 {
- if(iskanji(ch1)) return 0 ;//Š¿š‚Í‚O
- else if(iskatakana(ch1,ch2)) return 1 ;//ƒJƒ^ƒJƒi‚Í‚P
- else return 2 ;//‚»‚Ì‘¼‚Í‚Q
+ if(iskanji(ch1)) return 0 ;//æ¼¢å­—ã¯ï¼
+ else if(iskatakana(ch1,ch2)) return 1 ;//ã‚«ã‚¿ã‚«ãƒŠã¯ï¼‘
+ else return 2 ;//ãã®ä»–ã¯ï¼’
 }
-/*‹å“Ç“_‚ÌŒŸo*/
+/*å¥èª­ç‚¹ã®æ¤œå‡º*/
 int ispunct(char *ch)
 {
- if((strncmp(ch,"D",2)==0)
-  ||(strncmp(ch,"B",2)==0)
-  ||(strncmp(ch,"C",2)==0)
-  ||(strncmp(ch,"A",2)==0)
-  ) return 1;//‹å“Ç“_‚È‚ç‚P
+ if((strncmp(ch,"ï¼",2)==0)
+  ||(strncmp(ch,"ã€‚",2)==0)
+  ||(strncmp(ch,"ï¼Œ",2)==0)
+  ||(strncmp(ch,"ã€",2)==0)
+  ) return 1;//å¥èª­ç‚¹ãªã‚‰ï¼‘
   else return 0 ;
 }
- /*Œ`‘Ô‘f‚ÌØ‚èo‚µ*/
+ /*å½¢æ…‹ç´ ã®åˆ‡ã‚Šå‡ºã—*/
 void outputmorph(char *target) 
 {
  int i=0 ;
- int now,last;//Š¿š(0)EƒJƒ^ƒJƒi(1)E‚»‚Ì‘¼(2)‚Ì•Ê
+ int now,last;//æ¼¢å­—(0)ãƒ»ã‚«ã‚¿ã‚«ãƒŠ(1)ãƒ»ãã®ä»–(2)ã®åˆ¥
  last=typeset(target[i],target[i+1]) ;
  while(target[i]!='\0'){
-  if(ispunct(&(target[i]))==0){//‹å“Ç“_‚Å‚Í‚È‚¢
-   /*•¶“à‚Ìˆ—*/
+  if(ispunct(&(target[i]))==0){//å¥èª­ç‚¹ã§ã¯ãªã„
+   /*æ–‡å†…ã®å‡¦ç†*/
    now=typeset(target[i],target[i+1]) ;
-   if(now!=last) {//ší‚ª•Ï‚í‚Á‚Ä‚¢‚é
-    putchar('\n') ;//‹æØ‚è‚Ì‰üs‚ğo—Í
+   if(now!=last) {//å­—ç¨®ãŒå¤‰ã‚ã£ã¦ã„ã‚‹
+    putchar('\n') ;//åŒºåˆ‡ã‚Šã®æ”¹è¡Œã‚’å‡ºåŠ›
     last=now ;
    }
    putchar(target[i++]) ;
    putchar(target[i++]) ;
   }
-  else{//‹å“Ç“_
-  /*•¶––‚È‚Ç‚Ìˆ—*/
-   putchar('\n') ;//‹æØ‚è‚Ì‰üs‚ğo—Í
-   ++i;++i;//‹å“Ç“_‚Ì“Ç‚İ”ò‚Î‚µ
+  else{//å¥èª­ç‚¹
+  /*æ–‡æœ«ãªã©ã®å‡¦ç†*/
+   putchar('\n') ;//åŒºåˆ‡ã‚Šã®æ”¹è¡Œã‚’å‡ºåŠ›
+   ++i;++i;//å¥èª­ç‚¹ã®èª­ã¿é£›ã°ã—
    last=typeset(target[i],target[i+1]) ;   
   } 
  }
@@ -94,17 +94,17 @@ void outputmorph(char *target)
 
 int main()
 {
- char source[MAX] ;//“ü—Íƒf[ƒ^
- char target[MAX] ;//‘SŠpƒf[ƒ^
- int numchar ;//“ü—Í•¶š”
+ char source[MAX] ;//å…¥åŠ›ãƒ‡ãƒ¼ã‚¿
+ char target[MAX] ;//å…¨è§’ãƒ‡ãƒ¼ã‚¿
+ int numchar ;//å…¥åŠ›æ–‡å­—æ•°
 
- /*ƒeƒLƒXƒg‚ğ“Ç‚İ‚Ş*/
+ /*ãƒ†ã‚­ã‚¹ãƒˆã‚’èª­ã¿è¾¼ã‚€*/
  numchar=getsource(source) ;
 
- /*‘SŠp•¶š‚Ì‚İæ‚èo‚·*/
+ /*å…¨è§’æ–‡å­—ã®ã¿å–ã‚Šå‡ºã™*/
  getwidechar(target,source,numchar) ;
 
- /*Œ`‘Ô‘f‚ÌØ‚èo‚µ*/
+ /*å½¢æ…‹ç´ ã®åˆ‡ã‚Šå‡ºã—*/
  outputmorph(target) ;
 
  return 0 ;

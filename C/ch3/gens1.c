@@ -1,48 +1,48 @@
 //	gens1.c
-//	‘‚«Š·‚¦‹K‘¥‚É‚æ‚é•¶‚Ì¶¬ƒvƒƒOƒ‰ƒ€‚»‚Ì‚P
-//	‘‚«Š·‚¦‹K‘¥A‚É]‚Á‚Ä•¶‚ğ¶¬‚µ‚Ü‚·
-//  ‘‚«Š·‚¦‹K‘¥@A
-//    ‹K‘¥‡@	<•¶>¨<–¼Œ‹å„ƒ“®Œ‹å„
-//  @‹K‘¥‡A	<–¼Œ‹å>¨ƒ–¼Œ„‚Í
-//@@‹K‘¥‡B@ <“®Œ‹å>¨ƒ“®Œ„
+//	æ›¸ãæ›ãˆè¦å‰‡ã«ã‚ˆã‚‹æ–‡ã®ç”Ÿæˆãƒ—ãƒ­ã‚°ãƒ©ãƒ ãã®ï¼‘
+//	æ›¸ãæ›ãˆè¦å‰‡Aã«å¾“ã£ã¦æ–‡ã‚’ç”Ÿæˆã—ã¾ã™
+//  æ›¸ãæ›ãˆè¦å‰‡ã€€A
+//    è¦å‰‡â‘ 	<æ–‡>â†’<åè©å¥ï¼ï¼œå‹•è©å¥ï¼
+//  ã€€è¦å‰‡â‘¡	<åè©å¥>â†’ï¼œåè©ï¼ã¯
+//ã€€ã€€è¦å‰‡â‘¢ã€€ <å‹•è©å¥>â†’ï¼œå‹•è©ï¼
 
 
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
 
-#define NMAX 8192 //I’[‹L†€–Ú”‚ÌãŒÀ
-#define CHMAX 32  //I’[‹L†‚Ì’·‚³‚ÌãŒÀ
-#define NFILE "noun.txt"//–¼Œ‚ÌŠi”[‚³‚ê‚½ƒtƒ@ƒCƒ‹
-#define VFILE "verb.txt"//“®Œ‚ÌŠi”[‚³‚ê‚½ƒtƒ@ƒCƒ‹
+#define NMAX 8192 //çµ‚ç«¯è¨˜å·é …ç›®æ•°ã®ä¸Šé™
+#define CHMAX 32  //çµ‚ç«¯è¨˜å·ã®é•·ã•ã®ä¸Šé™
+#define NFILE "noun.txt"//åè©ã®æ ¼ç´ã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«
+#define VFILE "verb.txt"//å‹•è©ã®æ ¼ç´ã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«
 
 void np(char nlist[NMAX][CHMAX],int nnum) ;
 void vp(char vlist[NMAX][CHMAX],int vnum) ;
 void sentence(char nlist[NMAX][CHMAX],int nnum,char vlist[NMAX][CHMAX],int vnum) ;
 int setrnd(int num) ;
 
-/*‹K‘¥‡B@<“®Œ‹å>¨ƒ“®Œ„*/
+/*è¦å‰‡â‘¢ã€€<å‹•è©å¥>â†’ï¼œå‹•è©ï¼*/
 void vp(char vlist[NMAX][CHMAX],int vnum)
 {
  printf("%s",vlist[setrnd(vnum)]) ;
  
 }
 
-/*‹K‘¥‡A		<–¼Œ‹å>¨ƒ–¼Œ„‚Í*/
+/*è¦å‰‡â‘¡		<åè©å¥>â†’ï¼œåè©ï¼ã¯*/
 void np(char nlist[NMAX][CHMAX],int nnum)
 {
- printf("%s‚Í",nlist[setrnd(nnum)]) ;
+ printf("%sã¯",nlist[setrnd(nnum)]) ;
  
 }
 
-/*‹K‘¥‡@	<•¶>¨<–¼Œ‹å„ƒ“®Œ‹å„*/
+/*è¦å‰‡â‘ 	<æ–‡>â†’<åè©å¥ï¼ï¼œå‹•è©å¥ï¼*/
 void sentence(char nlist[NMAX][CHMAX],int nnum,char vlist[NMAX][CHMAX],int vnum)
 {
- np(nlist,nnum) ;//–¼Œ‹å‚Ì¶¬
- vp(vlist,vnum) ;//“®Œ‹å‚Ì¶¬
+ np(nlist,nnum) ;//åè©å¥ã®ç”Ÿæˆ
+ vp(vlist,vnum) ;//å‹•è©å¥ã®ç”Ÿæˆ
 }
 
-/*–¼ŒƒŠƒXƒgE“®ŒƒŠƒXƒg‚Ì“Ç‚İ‚İ*/
+/*åè©ãƒªã‚¹ãƒˆãƒ»å‹•è©ãƒªã‚¹ãƒˆã®èª­ã¿è¾¼ã¿*/
 int setlist(char list[NMAX][CHMAX],char *filename)
 {
  FILE *fp;
@@ -50,7 +50,7 @@ int setlist(char list[NMAX][CHMAX],char *filename)
  int i=0 ;
 
  if((fp=fopen(filename,"r"))==NULL){
-  fprintf(stderr,"ƒGƒ‰[@ƒtƒ@ƒCƒ‹%s‚ª‚ ‚è‚Ü‚¹‚ñ\n",filename);
+  fprintf(stderr,"ã‚¨ãƒ©ãƒ¼ã€€ãƒ•ã‚¡ã‚¤ãƒ«%sãŒã‚ã‚Šã¾ã›ã‚“\n",filename);
   exit(1) ;
  }
 
@@ -60,10 +60,10 @@ int setlist(char list[NMAX][CHMAX],char *filename)
   ++i ;
  }
  fclose(fp) ;
- return i ;//“ü—ÍŒÂ”‚ğ•Ô‚·
+ return i ;//å…¥åŠ›å€‹æ•°ã‚’è¿”ã™
 }
 
-/*num–¢–‚Ì—”‚ğƒZƒbƒg*/
+/*numæœªæº€ã®ä¹±æ•°ã‚’ã‚»ãƒƒãƒˆ*/
 int setrnd(int num)
 {
  int rndno ;
@@ -74,21 +74,21 @@ int setrnd(int num)
 
 int main()
 {
- char nlist[NMAX][CHMAX] ;//–¼ŒƒŠƒXƒg
- char vlist[NMAX][CHMAX] ;//“®ŒƒŠƒXƒg
- int nnum,vnum ;//ƒŠƒXƒg‚Ì€–Ú”
+ char nlist[NMAX][CHMAX] ;//åè©ãƒªã‚¹ãƒˆ
+ char vlist[NMAX][CHMAX] ;//å‹•è©ãƒªã‚¹ãƒˆ
+ int nnum,vnum ;//ãƒªã‚¹ãƒˆã®é …ç›®æ•°
  int i ;
  
- /*—”‚Ì‰Šú‰»*/
+ /*ä¹±æ•°ã®åˆæœŸåŒ–*/
  srand(65535) ;
- /*–¼ŒƒŠƒXƒg‚Æ“®ŒƒŠƒXƒg‚Ì“Ç‚İ‚İ*/
+ /*åè©ãƒªã‚¹ãƒˆã¨å‹•è©ãƒªã‚¹ãƒˆã®èª­ã¿è¾¼ã¿*/
  nnum=setlist(nlist,NFILE) ;
  vnum=setlist(vlist,VFILE) ;
 
  for(i=0;i<50;++i){
-  /*•¶‚Ì¶¬*/
+  /*æ–‡ã®ç”Ÿæˆ*/
   sentence(nlist,nnum,vlist,vnum) ;
-  printf("D\n") ;
+  printf("ï¼\n") ;
 }
  return 0 ;
 }

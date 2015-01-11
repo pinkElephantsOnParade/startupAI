@@ -1,38 +1,38 @@
 //	cutkk.c
-//	Š¿š‚âƒJƒ^ƒJƒiŒê‚Ì’Šo
-//	ƒeƒLƒXƒgƒf[ƒ^‚©‚çCŠ¿š‚âƒJƒ^ƒJƒi‚É‚æ‚éŒê‚ğ’Šo‚µ‚Ü‚·
+//	æ¼¢å­—ã‚„ã‚«ã‚¿ã‚«ãƒŠèªã®æŠ½å‡º
+//	ãƒ†ã‚­ã‚¹ãƒˆãƒ‡ãƒ¼ã‚¿ã‹ã‚‰ï¼Œæ¼¢å­—ã‚„ã‚«ã‚¿ã‚«ãƒŠã«ã‚ˆã‚‹èªã‚’æŠ½å‡ºã—ã¾ã™
 
 #include<stdio.h>
 #include<string.h>
-#define MAX 65535*3 //192kƒoƒCƒg‚Ü‚Åˆ—‰Â”\
+#define MAX 65535*3 //192kãƒã‚¤ãƒˆã¾ã§å‡¦ç†å¯èƒ½
 
-/*ƒeƒLƒXƒg‚ğ“Ç‚İ‚Ş*/
+/*ãƒ†ã‚­ã‚¹ãƒˆã‚’èª­ã¿è¾¼ã‚€*/
 int getsource(char *s)
 {
- int n=0 ;//•¶š”‚ÌƒJƒEƒ“ƒ^
+ int n=0 ;//æ–‡å­—æ•°ã®ã‚«ã‚¦ãƒ³ã‚¿
 
  while((s[n++]=getchar())!=EOF) ;
  return n ;
 }
 
- /*‘SŠp•¶š‚Ì‚İæ‚èo‚·*/
+ /*å…¨è§’æ–‡å­—ã®ã¿å–ã‚Šå‡ºã™*/
 void getwidechar(char *t,char *s,int n)
 {
- int in=0;//“ü—Íƒf[ƒ^‚Ìƒ|ƒCƒ“ƒ^
- int out=0 ;//o—Íƒf[ƒ^‚Ìƒ|ƒCƒ“ƒ^
+ int in=0;//å…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã®ãƒã‚¤ãƒ³ã‚¿
+ int out=0 ;//å‡ºåŠ›ãƒ‡ãƒ¼ã‚¿ã®ãƒã‚¤ãƒ³ã‚¿
  int d;
  while(in<n){
   d=(unsigned char)s[in] ;
-  if(((d>0x7F)&&(d<0xA0))||(d>0xDF)&&(d<0xF0)){//‚QƒoƒCƒg•¶š
+  if(((d>0x7F)&&(d<0xA0))||(d>0xDF)&&(d<0xF0)){//ï¼’ãƒã‚¤ãƒˆæ–‡å­—
     t[out++]=s[in++];
     t[out++]=s[in++];
   }
   else ++in ;
  }
- t[out]='\0' ;//•¶š—ñ‚ÌI’[
+ t[out]='\0' ;//æ–‡å­—åˆ—ã®çµ‚ç«¯
 }
 
-/*Š¿š‚©‚»‚êˆÈŠO‚©‚Ì”»•Ê*/
+/*æ¼¢å­—ã‹ãã‚Œä»¥å¤–ã‹ã®åˆ¤åˆ¥*/
 int iskanji(char ch)
 {
  int d ;
@@ -40,7 +40,7 @@ int iskanji(char ch)
  if(d>=0x88) return 1 ;
  else return 0 ;
 }
-/*ƒJƒ^ƒJƒi‚©‚»‚êˆÈŠO‚©‚Ì”»•Ê*/
+/*ã‚«ã‚¿ã‚«ãƒŠã‹ãã‚Œä»¥å¤–ã‹ã®åˆ¤åˆ¥*/
 int iskatakana(char ch1,char ch2)
 {
  int d1,d2 ;
@@ -49,33 +49,33 @@ int iskatakana(char ch1,char ch2)
  d1=(unsigned char)ch1 ;
  d2=(unsigned char)ch2 ;
  if((d1==0x83)&&(d2>=40)&&(d2<=0x96)) return 1 ;
- if(strncmp(w,"[",2)==0) return 1 ;//’·‰¹‹L†‚¾‚¯“Á•Êˆµ‚¢
+ if(strncmp(w,"ãƒ¼",2)==0) return 1 ;//é•·éŸ³è¨˜å·ã ã‘ç‰¹åˆ¥æ‰±ã„
  else return 0 ;
 }
-/*ší‚Ìİ’è*/
+/*å­—ç¨®ã®è¨­å®š*/
 int typeset(char ch1,char ch2)
 {
- if(iskanji(ch1)) return 0 ;//Š¿š‚Í‚O
- else if(iskatakana(ch1,ch2)) return 1 ;//ƒJƒ^ƒJƒi‚Í‚P
- else return 2 ;//‚»‚Ì‘¼‚Í‚Q
+ if(iskanji(ch1)) return 0 ;//æ¼¢å­—ã¯ï¼
+ else if(iskatakana(ch1,ch2)) return 1 ;//ã‚«ã‚¿ã‚«ãƒŠã¯ï¼‘
+ else return 2 ;//ãã®ä»–ã¯ï¼’
 }
 
 
-/*Œê‚ÌØ‚èo‚µ*/
+/*èªã®åˆ‡ã‚Šå‡ºã—*/
 void outputmorph(char *target) 
 {
  int i=0 ;
- int now,last;//Š¿š(0)EƒJƒ^ƒJƒi(1)E‚»‚Ì‘¼(2)‚Ì•Ê
+ int now,last;//æ¼¢å­—(0)ãƒ»ã‚«ã‚¿ã‚«ãƒŠ(1)ãƒ»ãã®ä»–(2)ã®åˆ¥
  last=typeset(target[i],target[i+1]) ;
  while(target[i]!='\0'){
    now=typeset(target[i],target[i+1]) ;
-   if((now==0)||(now==1)){//Š¿š‚©ƒJƒ^ƒJƒi
+   if((now==0)||(now==1)){//æ¼¢å­—ã‹ã‚«ã‚¿ã‚«ãƒŠ
     putchar(target[i++]) ;
     putchar(target[i++]) ;
    }
-   else i+=2 ;//Š¿šEƒJƒ^ƒJƒiˆÈŠO‚Ì“Ç‚İ”ò‚Î‚µ
-   if((now!=last)&&(last!=2)) {//ší‚ª•Ï‚í‚Á‚Ä‚¢‚é
-    putchar('\n') ;//‹æØ‚è‚Ì‰üs‚ğo—Í
+   else i+=2 ;//æ¼¢å­—ãƒ»ã‚«ã‚¿ã‚«ãƒŠä»¥å¤–ã®èª­ã¿é£›ã°ã—
+   if((now!=last)&&(last!=2)) {//å­—ç¨®ãŒå¤‰ã‚ã£ã¦ã„ã‚‹
+    putchar('\n') ;//åŒºåˆ‡ã‚Šã®æ”¹è¡Œã‚’å‡ºåŠ›
    }
    last=now ;
  }
@@ -83,17 +83,17 @@ void outputmorph(char *target)
 
 int main()
 {
- char source[MAX] ;//“ü—Íƒf[ƒ^
- char target[MAX] ;//‘SŠpƒf[ƒ^
- int numchar ;//“ü—Í•¶š”
+ char source[MAX] ;//å…¥åŠ›ãƒ‡ãƒ¼ã‚¿
+ char target[MAX] ;//å…¨è§’ãƒ‡ãƒ¼ã‚¿
+ int numchar ;//å…¥åŠ›æ–‡å­—æ•°
 
- /*ƒeƒLƒXƒg‚ğ“Ç‚İ‚Ş*/
+ /*ãƒ†ã‚­ã‚¹ãƒˆã‚’èª­ã¿è¾¼ã‚€*/
  numchar=getsource(source) ;
 
- /*‘SŠp•¶š‚Ì‚İæ‚èo‚·*/
+ /*å…¨è§’æ–‡å­—ã®ã¿å–ã‚Šå‡ºã™*/
  getwidechar(target,source,numchar) ;
 
- /*Œê‚ÌØ‚èo‚µ*/
+ /*èªã®åˆ‡ã‚Šå‡ºã—*/
  outputmorph(target) ;
 
  return 0 ;

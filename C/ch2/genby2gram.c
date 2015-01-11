@@ -1,36 +1,38 @@
 //	genby2gram.c
-//	2-gram‚Ì˜A½‚É‚æ‚è•¶‚ğì¬‚·‚é
-//	2-gram‚ªŠi”[‚³‚ê‚½ƒtƒ@ƒCƒ‹2gram.txt‚ğ—p‚¢‚Ü‚·
-//	ŠJn•¶š‚ğw’è‚·‚é‚Æ•¶‚ğ¶¬‚µ‚Ü‚·
+//	2-gramã®é€£é–ã«ã‚ˆã‚Šæ–‡ã‚’ä½œæˆã™ã‚‹
+//	2-gramãŒæ ¼ç´ã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«2gram.txtã‚’ç”¨ã„ã¾ã™
+//	é–‹å§‹æ–‡å­—ã‚’æŒ‡å®šã™ã‚‹ã¨æ–‡ã‚’ç”Ÿæˆã—ã¾ã™
 
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <locale.h>
 
-#define MAXNO 100000 //2-gram‚ÌÅ‘å”
-#define MAXLINE 256 //1s‚ÌÅ‘åƒoƒCƒg”
-#define FILENAME "2gram.txt" //2-gram‚ªŠi”[‚³‚ê‚½ƒtƒ@ƒCƒ‹
+#define MAXNO 100000 //2-gramã®æœ€å¤§æ•°
+#define MAXLINE 256 //1è¡Œã®æœ€å¤§ãƒã‚¤ãƒˆæ•°
+#define FILENAME "2gram.txt" //2-gramãŒæ ¼ç´ã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«
 
-/*2-gramƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ*/
-int read2gram(char db2gram[MAXNO][6])
+/*2-gramãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿*/
+int read2gram(char db2gram[MAXNO][9])
 {
  FILE *fp;
  char line[MAXLINE] ;
  int i=0 ;
 
  if((fp=fopen(FILENAME,"r"))==NULL){
-  fprintf(stderr,"ƒGƒ‰[@ƒtƒ@ƒCƒ‹2gram.txt‚ª‚ ‚è‚Ü‚¹‚ñ\n");
+  fprintf(stderr,"ã‚¨ãƒ©ãƒ¼ã€€ãƒ•ã‚¡ã‚¤ãƒ«2gram.txtãŒã‚ã‚Šã¾ã›ã‚“\n");
   exit(1) ;
  }
 
  while(fgets(line,MAXLINE,fp)!=NULL){
-  strncpy(db2gram[i],line,4) ;//‘SŠp2•¶š‚ğƒRƒs[
-  db2gram[i][5]='\0' ;
+  strncpy(db2gram[i],line,9) ;//å…¨è§’2æ–‡å­—ã‚’ã‚³ãƒ”ãƒ¼
+  db2gram[i][9]='\0' ;
   ++i ;
  }
- return i ;//2-gram‚ÌŒÂ”‚ğ•Ô‚·
+ return i ;//2-gramã®å€‹æ•°ã‚’è¿”ã™
 }
-/*ŠJn•¶š‚ª‰½‰ñŠÜ‚Ü‚ê‚é‚©”‚¦‚é*/
+
+/*é–‹å§‹æ–‡å­—ãŒä½•å›å«ã¾ã‚Œã‚‹ã‹æ•°ãˆã‚‹*/
 int findch(char *startch,char db2gram[MAXNO][6],int n) 
 {
  int i ;
@@ -40,7 +42,7 @@ int findch(char *startch,char db2gram[MAXNO][6],int n)
  }
  return no ;
 }
-/*num–¢–‚Ì—”‚ğƒZƒbƒg*/
+/*numæœªæº€ã®ä¹±æ•°ã‚’ã‚»ãƒƒãƒˆ*/
 int setrnd(int num)
 {
  int rndno ;
@@ -49,13 +51,13 @@ int setrnd(int num)
 
 }
 
-/*Ÿ‚Ì•¶š‚ğn-gram‚É‚æ‚èƒ‰ƒ“ƒ_ƒ€‚ÉƒZƒbƒg*/
+/*æ¬¡ã®æ–‡å­—ã‚’n-gramã«ã‚ˆã‚Šãƒ©ãƒ³ãƒ€ãƒ ã«ã‚»ãƒƒãƒˆ*/
 void setrndstr(char *startch,char db2gram[MAXNO][6],int n)
 {
  int i ;
  int point ;
  
- point=setrnd(n) ;//n–¢–‚Ì—”‚ğƒZƒbƒg
+ point=setrnd(n) ;//næœªæº€ã®ä¹±æ•°ã‚’ã‚»ãƒƒãƒˆ
  for(i=0;i<n;++i){
   if(i==point){
    startch[0]=db2gram[i][2] ;
@@ -66,14 +68,14 @@ void setrndstr(char *startch,char db2gram[MAXNO][6],int n)
  }  
 }
 
-/*Ÿ‚Ì•¶š‚ğn-gram‚É‚æ‚èƒZƒbƒg*/
+/*æ¬¡ã®æ–‡å­—ã‚’n-gramã«ã‚ˆã‚Šã‚»ãƒƒãƒˆ*/
 void setnext(char *startch,char db2gram[MAXNO][6],int n,int num) 
 {
  int i ;
  int no=0 ;
  int point ;
  
- point=setrnd(num) ;//num–¢–‚Ì—”‚ğƒZƒbƒg
+ point=setrnd(num) ;//numæœªæº€ã®ä¹±æ•°ã‚’ã‚»ãƒƒãƒˆ
  for(i=0;i<n;++i){
   if(strncmp(startch,db2gram[i],2)==0) ++ no ;
   if(no==point){
@@ -86,55 +88,58 @@ void setnext(char *startch,char db2gram[MAXNO][6],int n,int num)
 }
 
 
-/*•¶‚Ì¶¬*/
+/*æ–‡ã®ç”Ÿæˆ*/
 void generates(char *startch,char db2gram[MAXNO][6],int n)
 {
  int i,num ;
  
-  /*ŠJn•¶š‚ğo—Í‚·‚é*/
-  putchar(startch[0]) ; putchar(startch[1]) ;
-  /*‹å“_‚ªo‚é‚Ü‚ÅŒJ‚è•Ô‚µ*/
+  /*é–‹å§‹æ–‡å­—ã‚’å‡ºåŠ›ã™ã‚‹*/
+  putchar(startch[0]) ; putchar(startch[1]); putchar(startch[2]);
+  /*å¥ç‚¹ãŒå‡ºã‚‹ã¾ã§ç¹°ã‚Šè¿”ã—*/
+
  do{
-  /*ŠJn•¶š‚ª‰½‰ñŠÜ‚Ü‚ê‚é‚©”‚¦‚é*/
+  /*é–‹å§‹æ–‡å­—ãŒä½•å›å«ã¾ã‚Œã‚‹ã‹æ•°ãˆã‚‹*/
   num=findch(startch,db2gram,n) ;
-  /*‚»‚Ì’†‚©‚çƒ‰ƒ“ƒ_ƒ€‚É•¶š—ñ‚ğ‘I‚Ô*/
+  /*ãã®ä¸­ã‹ã‚‰ãƒ©ãƒ³ãƒ€ãƒ ã«æ–‡å­—åˆ—ã‚’é¸ã¶*/
   if(num!=0)
    setnext(startch,db2gram,n,num) ;
   else
    setrndstr(startch,db2gram,n) ;
-  /*•¶š‚ğo—Í‚·‚é*/
-  putchar(startch[0]) ; putchar(startch[1]) ;
- }while((strncmp(startch,"D",2)!=0)&&(strncmp(startch,"B",2)!=0)) ;
+  /*æ–‡å­—ã‚’å‡ºåŠ›ã™ã‚‹*/
+  putchar(startch[0]) ; putchar(startch[1]); putchar(startch[2]);
+ }while((strncmp(startch,"ï¼",3)!=0)&&(strncmp(startch,"ã€‚",3)!=0)) ;
  printf("\n") ;
 }
 
- 
-
-
-
 int main()
 {
- char db2gram[MAXNO][6] ;//2gram‚Ìƒf[ƒ^ƒx[ƒX
- int n ;//2-gram‚ÌŒÂ”
- char startch[MAXLINE];//ŠJn•¶š
+ char db2gram[MAXNO][9] ;//2gramã®ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹
+ int n ;//2-gramã®å€‹æ•°
+ char startch[MAXLINE];//é–‹å§‹æ–‡å­—
  int i ;
- char workch[MAXLINE];//ì‹Æ—p‚Ì•¶š
-
+ char workch[MAXLINE];//ä½œæ¥­ç”¨ã®æ–‡å­—
+ setlocale( LC_CTYPE, "jpn" );
+ int len, j=0;
  
- /*—”‚Ì‰Šú‰»*/
+ /*ä¹±æ•°ã®åˆæœŸåŒ–*/
  srand(65535) ;
- /*2-gramƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ*/
+
+ /*2-gramãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿*/
  n=read2gram(db2gram) ;
 
-
- /*ŠJn•¶š‚ÌŒˆ’è*/
- printf("ŠJn•¶š‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢\n") ;
+ /*é–‹å§‹æ–‡å­—ã®æ±ºå®š*/
+ printf("é–‹å§‹æ–‡å­—ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„\n") ;
  fgets(startch,MAXLINE,stdin) ;
 
- /*10‰ñ‚Ì•¶‚Ì¶¬*/
+ for(i =0; i < 8;i++){
+   putchar(db2gram[0][i]);
+ }
+ putchar('Â¥n');
+
+ /*10å›ã®æ–‡ã®ç”Ÿæˆ*/
  for(i=0;i<10;++i){
   strcpy(workch,startch) ;
-  generates(workch,db2gram,n) ;
+//  generates(workch,db2gram,n) ;
  }
  return 0 ;
 }

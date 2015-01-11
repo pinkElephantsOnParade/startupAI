@@ -1,29 +1,29 @@
 //	sorts.c
-//	•¶š—ñ‚ğ®—ñ‚µ‚Ü‚·
-//  n-gram®—ñ—p‚Å‚·‚©‚çC1s‚Í16byteˆÈ“à‚É§ŒÀ‚µ‚Ä‚¢‚Ü‚·
+//	æ–‡å­—åˆ—ã‚’æ•´åˆ—ã—ã¾ã™
+//  n-gramæ•´åˆ—ç”¨ã§ã™ã‹ã‚‰ï¼Œ1è¡Œã¯16byteä»¥å†…ã«åˆ¶é™ã—ã¦ã„ã¾ã™
 
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#define LINESIZE 16 //1s16ƒoƒCƒg‚Ü‚Åˆ—‰Â”\
-#define MAX 65536*3 //192ks‚Ü‚Åˆ—‰Â”\  
+#define LINESIZE 16 //1è¡Œ16ãƒã‚¤ãƒˆã¾ã§å‡¦ç†å¯èƒ½
+#define MAX 65536*3 //192kè¡Œã¾ã§å‡¦ç†å¯èƒ½  
 
-char lines[MAX][LINESIZE] ; //®—ñ‘ÎÛ
+char lines[MAX][LINESIZE] ; //æ•´åˆ—å¯¾è±¡
 
 int main()
 {
- char buf[LINESIZE] ;//“Ç‚İ‚İƒoƒbƒtƒ@
- int pos=0 ;//“Ç‚İ‚İs”‚ÌƒJƒEƒ“ƒ^
+ char buf[LINESIZE] ;//èª­ã¿è¾¼ã¿ãƒãƒƒãƒ•ã‚¡
+ int pos=0 ;//èª­ã¿è¾¼ã¿è¡Œæ•°ã®ã‚«ã‚¦ãƒ³ã‚¿
  int i ;
  
- /*ƒeƒLƒXƒg‚ğ“Ç‚İ‚Ş*/
+ /*ãƒ†ã‚­ã‚¹ãƒˆã‚’èª­ã¿è¾¼ã‚€*/
  while(fgets(buf,LINESIZE,stdin)!=NULL){
    strcpy(lines[pos],buf) ;
    if((++pos)>=MAX){ fprintf(stderr,"File too big.\n") ;exit(1);}
   }
- /*®—ñ*/
+ /*æ•´åˆ—*/
  qsort(lines,pos,LINESIZE,(int (*)(const void *,const void *))strcmp) ;
- /*o—Í*/
+ /*å‡ºåŠ›*/
  for(i=0;i<pos;++i)
   printf("%s",lines[i]) ;
   
