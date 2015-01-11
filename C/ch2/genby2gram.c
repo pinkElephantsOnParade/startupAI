@@ -6,7 +6,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <locale.h>
 
 #define MAXNO 100000 //2-gramの最大数
 #define MAXLINE 256 //1行の最大バイト数
@@ -121,8 +120,6 @@ int main()
  char startch[MAXLINE];//開始文字
  int i ;
  char workch[MAXLINE];//作業用の文字
- setlocale( LC_CTYPE, "jpn" );
- int len, j=0;
  
  /*乱数の初期化*/
  srand(65535) ;
