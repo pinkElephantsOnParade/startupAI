@@ -22,7 +22,7 @@ void getwidechar(char *t,char *s,int n)
  while(in<n){
   d=(unsigned char)s[in] ;
   if(((d>0x7F)&&(d<0xA0))||(d>0xDF)&&(d<0xF0)){
-  //２バイト文字
+  //3バイト文字
     t[out++]=s[in++];
     t[out++]=s[in++];
     t[out++]=s[in++];
