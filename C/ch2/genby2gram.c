@@ -13,7 +13,7 @@
 #define FILENAME "2gram.txt" //2-gramが格納されたファイル
 
 /*2-gramファイルの読み込み*/
-int read2gram(char db2gram[MAXNO][9])
+int read2gram(char db2gram[MAXNO][7])
 {
  FILE *fp;
  char line[MAXLINE] ;
@@ -25,20 +25,20 @@ int read2gram(char db2gram[MAXNO][9])
  }
 
  while(fgets(line,MAXLINE,fp)!=NULL){
-  strncpy(db2gram[i],line,9) ;//全角2文字をコピー
-  db2gram[i][9]='\0' ;
+  strncpy(db2gram[i],line,6) ;//全角2文字をコピー
+  db2gram[i][6]='\0' ;
   ++i ;
  }
  return i ;//2-gramの個数を返す
 }
 
 /*開始文字が何回含まれるか数える*/
-int findch(char *startch,char db2gram[MAXNO][6],int n) 
+int findch(char *startch,char db2gram[MAXNO][7],int n) 
 {
  int i ;
  int no=0 ;
  for(i=0;i<n;++i){
-  if(strncmp(startch,db2gram[i],2)==0) ++ no ;
+  if(strncmp(startch,db2gram[i],3)==0) ++ no ;
  }
  return no ;
 }
@@ -52,7 +52,7 @@ int setrnd(int num)
 }
 
 /*次の文字をn-gramによりランダムにセット*/
-void setrndstr(char *startch,char db2gram[MAXNO][6],int n)
+void setrndstr(char *startch,char db2gram[MAXNO][7],int n)
 {
  int i ;
  int point ;
@@ -60,16 +60,17 @@ void setrndstr(char *startch,char db2gram[MAXNO][6],int n)
  point=setrnd(n) ;//n未満の乱数をセット
  for(i=0;i<n;++i){
   if(i==point){
-   startch[0]=db2gram[i][2] ;
-   startch[1]=db2gram[i][3] ;
-   startch[2]='\0' ;
+   startch[0]=db2gram[i][3] ;
+   startch[1]=db2gram[i][4] ;
+   startch[2]=db2gram[i][5] ;
+   startch[3]='\0' ;
    break ;
   }
  }  
 }
 
 /*次の文字をn-gramによりセット*/
-void setnext(char *startch,char db2gram[MAXNO][6],int n,int num) 
+void setnext(char *startch,char db2gram[MAXNO][7],int n,int num) 
 {
  int i ;
  int no=0 ;
@@ -77,11 +78,13 @@ void setnext(char *startch,char db2gram[MAXNO][6],int n,int num)
  
  point=setrnd(num) ;//num未満の乱数をセット
  for(i=0;i<n;++i){
-  if(strncmp(startch,db2gram[i],2)==0) ++ no ;
+  if(strncmp(startch,db2gram[i],3)==0) ++ no ;
   if(no==point){
-   startch[0]=db2gram[i][2] ;
-   startch[1]=db2gram[i][3] ;
-   startch[2]='\0' ;
+   startch[0]=db2gram[i][3] ;
+   startch[1]=db2gram[i][4] ;
+   startch[2]=db2gram[i][5] ;
+   startch[3]='\0' ;
+   break ;
    break ;
   }
  }  
@@ -89,7 +92,7 @@ void setnext(char *startch,char db2gram[MAXNO][6],int n,int num)
 
 
 /*文の生成*/
-void generates(char *startch,char db2gram[MAXNO][6],int n)
+void generates(char *startch,char db2gram[MAXNO][7],int n)
 {
  int i,num ;
  
@@ -113,7 +116,7 @@ void generates(char *startch,char db2gram[MAXNO][6],int n)
 
 int main()
 {
- char db2gram[MAXNO][9] ;//2gramのデータベース
+ char db2gram[MAXNO][7] ;//2gramのデータベース
  int n ;//2-gramの個数
  char startch[MAXLINE];//開始文字
  int i ;
@@ -130,16 +133,11 @@ int main()
  /*開始文字の決定*/
  printf("開始文字を入力してください\n") ;
  fgets(startch,MAXLINE,stdin) ;
-
- for(i =0; i < 8;i++){
-   putchar(db2gram[0][i]);
- }
- putchar('¥n');
-
+ 
  /*10回の文の生成*/
  for(i=0;i<10;++i){
   strcpy(workch,startch) ;
-//  generates(workch,db2gram,n) ;
+  generates(workch,db2gram,n);
  }
  return 0 ;
 }
