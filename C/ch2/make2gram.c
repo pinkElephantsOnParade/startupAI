@@ -2,7 +2,7 @@
 //	2-gramデータの作成
 //	テキストから全角データのみ抽出して2-gramを作ります
 
-#include<stdio.h>
+#include <stdio.h>
 #define MAX 65535*3 //192kバイトまで処理可能
 
 /*テキストを読み込む*/
@@ -22,7 +22,8 @@ void getwidechar(char *t,char *s,int n)
  int d;
  while(in<n){
   d=(unsigned char)s[in] ;
-  if(((d>0x7F)&&(d<0xA0))||(d>0xDF)&&(d<0xF0)){//２バイト文字
+  if(((d>0x7F)&&(d<0xA0))||(d>0xDF)&&(d<0xF0)){//3バイト文字
+    t[out++]=s[in++];
     t[out++]=s[in++];
     t[out++]=s[in++];
   }
@@ -35,11 +36,13 @@ void getwidechar(char *t,char *s,int n)
 void outputtarget(char *target) 
 {
  int i=0 ;
- while((target[i]!='\0')&&(target[i+2]!='\0')){
+ while((target[i]!='\0')&&(target[i+3]!='\0')){
+  putchar(target[i++]) ;
   putchar(target[i++]) ;
   putchar(target[i++]) ;
   putchar(target[i]) ;
   putchar(target[i+1]) ;
+  putchar(target[i+2]) ;
   putchar('\n') ;
  }
 }

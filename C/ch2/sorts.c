@@ -2,9 +2,9 @@
 //	文字列を整列します
 //  n-gram整列用ですから，1行は16byte以内に制限しています
 
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #define LINESIZE 16 //1行16バイトまで処理可能
 #define MAX 65536*3 //192k行まで処理可能  
 

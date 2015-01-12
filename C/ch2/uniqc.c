@@ -2,8 +2,8 @@
 //	重複行の数え上げと削除
 //	同じ行の繰り返しを削除します
 
-#include<stdio.h>
-#include<string.h>
+#include <stdio.h>
+#include <string.h>
 #define MAXLINE 65535 //1行64kバイトまで処理可能
 
 int main()
