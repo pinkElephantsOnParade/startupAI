@@ -3,9 +3,9 @@
 //	形態素の連鎖が格納されたファイルmorph.txtを用います
 // 形態素の切り出しにはcutm_p.cプログラムを使ってください．
 
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 #define MAXNO 10000 //形態素連鎖の最大数
 #define MAXLINE 48 //1行の最大バイト数

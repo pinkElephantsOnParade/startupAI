@@ -1,4 +1,10 @@
+
 # -*- coding: utf-8 -*-
+import os.path
+import re
+import sys
+import codecs
+import random
 
 """
 	コマンドラインから文字列を抽出する
@@ -51,9 +57,57 @@ def fileFormatCheck(textList):
 				print 'Usage: #1 This text format is incorrect.'
 				quit()
 
+"""
+	開始文字が何回含まれるか数える
+"""
+def countFindFrontChar(word, lists):
+	count = 0
+	for element in lists:
+		if word == element[0]:
+			count = count + 1
+	return count
 
-def generates(keyword):
-	print keyword
+"""
+	次の一文字をランダムに選択する(隠れマルコフモデル)
+"""
+def setnext(word, glist):
+	countWord = countFindFrontChar(word, glist);
+	randIndex = 0
+
+	if countWord == 0:
+		print "t"
+		randIndex = random.randint(0, len(glist))
+	else :
+		print "f"
+		randIndex = random.randint(0, countWord)
+
+	return glist[randIndex][1]
+
+
+"""
+	文の生成
+"""
+def generates(keyword, glist):
+	botSentence = ""
+	nextWord = ""
+	if len(keyword.strip()) != 3:
+		print 'Usage: #2 Please input a 全角1文字.'
+		quit()
+	if len(keyword.strip().decode('utf-8')) != 1:
+		print 'Usage: #2 Please input a 全角1文字.'
+		quit()
+
+	chNumber = countFindFrontChar(keyword.strip().decode('utf-8'), glist)
+
+	#先頭１文字を挿入
+	botSentence = keyword.strip().decode('utf-8')
+	nextWord = keyword.strip().decode('utf-8')
+
+	#2文字目以降を挿入
+	for a in range(10):
+		nextWord = setnext(nextWord, glist)
+		botSentence = botSentence + nextWord 
+	return botSentence
 
 #-----main-----
 if __name__ == "__main__":
@@ -61,11 +115,12 @@ if __name__ == "__main__":
 	textList = [item.strip() for item in getReadLineList(txtPath)]
 	fileFormatCheck(textList)
 
-	sentence = raw_input("開始文字を入力してください:")
-	generates(sentence)
+	sentence = raw_input("開始文字を入力してください(全角１文字):")
+
+	print generates(sentence, textList)
+
 
 	#要素をソート
-	textList.sort()	
-
-	for line in textList:
-		print line
+#	textList.sort()	
+#	for line in textList:
+#		print line
