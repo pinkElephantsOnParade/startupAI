@@ -68,20 +68,30 @@ def countFindFrontChar(word, lists):
 	return count
 
 """
-	次の一文字をランダムに選択する(隠れマルコフモデル)
+	先頭文字が合致する要素をリスト化する
+"""
+def extractElementListFromFrontWord(word, lists):
+	extList = []
+	for element in lists:
+		if word == element[0]:
+			extList.append(element)
+	return extList
+
+"""
+	次の一文字をランダムに選択する
 """
 def setnext(word, glist):
-	countWord = countFindFrontChar(word, glist);
+	resultList = extractElementListFromFrontWord(word, glist)
 	randIndex = 0
-
-	if countWord == 0:
-		print "t"
-		randIndex = random.randint(0, len(glist))
+	nextWord = ""
+	if len(resultList) == 0:
+		randIndex = random.randint(0, len(glist) - 1)
+		nextWord = glist[randIndex][1]
 	else :
-		print "f"
-		randIndex = random.randint(0, countWord)
+		randIndex = random.randint(0, len(resultList) - 1)
+		nextWord = resultList[randIndex][1]
 
-	return glist[randIndex][1]
+	return nextWord
 
 
 """
@@ -102,11 +112,13 @@ def generates(keyword, glist):
 	#先頭１文字を挿入
 	botSentence = keyword.strip().decode('utf-8')
 	nextWord = keyword.strip().decode('utf-8')
+	maxCount = 0
 
 	#2文字目以降を挿入
-	for a in range(10):
+	while nextWord != "．".decode('utf-8') and nextWord != "。".decode('utf-8') and maxCount < 100:
 		nextWord = setnext(nextWord, glist)
-		botSentence = botSentence + nextWord 
+		botSentence = botSentence + nextWord
+		maxCount += 1 		
 	return botSentence
 
 #-----main-----
@@ -117,8 +129,8 @@ if __name__ == "__main__":
 
 	sentence = raw_input("開始文字を入力してください(全角１文字):")
 
-	print generates(sentence, textList)
-
+	for i in range(10):
+		print generates(sentence, textList)
 
 	#要素をソート
 #	textList.sort()	
