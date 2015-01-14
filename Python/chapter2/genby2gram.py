@@ -107,7 +107,7 @@ def generates(keyword, glist):
 		print 'Usage: #2 Please input a 全角1文字.'
 		quit()
 
-	chNumber = countFindFrontChar(keyword.strip().decode('utf-8'), glist)
+#	chNumber = countFindFrontChar(keyword.strip().decode('utf-8'), glist)
 
 	#先頭１文字を挿入
 	botSentence = keyword.strip().decode('utf-8')
