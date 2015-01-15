@@ -49,19 +49,23 @@ int iskanji(char ch0, char ch1,char ch2)
  else return 0 ;
 }
 /*カタカナかそれ以外かの判別*/
-int iskatakana(char ch1,char ch2)
+int iskatakana(char ch0, char ch1,char ch2)
 {
- int d1,d2 ;
+ int d0,d1,d2 ;
+ d0=(unsigned char)ch0 ;
  d1=(unsigned char)ch1 ;
  d2=(unsigned char)ch2 ;
- if((d1==0x82)&&(d2>=0xa0)) return 1 ;
+ if((d0==0xe3 &&(d1==0x82)&&(0xa1 <= d2 && d2<= 0xbf))
+  ||(d0==0xe3 &&(d1==0x83)&&(0x80 <= d2 && d2<= 0xb6))
+  ||(d0==0xe3 && d1==0x83 && d2 == 0xbc)
+  ) return 1 ;
  else return 0 ;
 }
 /*字種の設定*/
 int typeset(char ch0, char ch1,char ch2)
 {
  if(iskanji(ch0,ch1,ch2)) return 0 ;//漢字は０
- else if(iskatakana(ch1,ch2)) return 1 ;//カタカナは１
+ else if(iskatakana(ch0,ch1,ch2)) return 1 ;//カタカナは１
  else return 2 ;//その他は２
 }
 /*句読点の検出*/
@@ -108,7 +112,7 @@ void outputmorph(char *target)
  }
 
  for(i =0; i < count;i++){
-   printf("%d \n", idxL[i]);
+//   printf("%d \n", idxL[i]);
  }
 
 }
