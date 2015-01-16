@@ -3,9 +3,9 @@
 //	形態素の連鎖が格納されたファイルmorph.txtを用います
 //	開始文字列を指定すると文を生成します
 
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 #define MAXNO 10000 //形態素連鎖の最大数
 #define MAXLINE 48 //1行の最大バイト数
@@ -100,7 +100,7 @@ void generates(char *startch,char db[MAXNO][2][MAXLINE],int n)
     setrndstr(startch,db,n) ;
   /*文字を出力する*/
   printf("%s",startch) ;
- }while((strncmp(startch,"．",2)!=0)&&(strncmp(startch,"。",2)!=0)) ;
+ }while((strncmp(startch,"．",3)!=0)&&(strncmp(startch,"。",3)!=0)) ;
  printf("\n") ;
 }
 

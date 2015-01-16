@@ -7,9 +7,9 @@
 //　　規則③　 <動詞句>→＜動詞＞
 
 
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 #define NMAX 8192 //終端記号項目数の上限
 #define CHMAX 32  //終端記号の長さの上限

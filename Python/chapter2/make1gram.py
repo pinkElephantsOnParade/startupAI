@@ -73,3 +73,4 @@ if __name__ == "__main__":
 		outstr = outputTarget(line)
 		setWriteLineList(txtPath, outstr)
 
+	
