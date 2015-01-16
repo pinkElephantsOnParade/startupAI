@@ -7,8 +7,6 @@ import string
 import os.path
 import codecs
 
-sentence = "太郎はこの本を二郎を見た女性に渡した。"
-
 """
 	コマンドラインから文字列を抽出する
 	.txt以外は強制終了
@@ -43,22 +41,6 @@ def getReadLineList(path):
 		lineList = iStream.readlines()
 		iStream.close()
 	return lineList
-
-"""
-	テキストファイルのフォーマットチェック
-"""
-def fileFormatCheck(textList):
-	if len(textList) == 0:
-		print 'Usage: #0 This text format is incorrect.'
-		quit()
-
-	initTxtLength = len(textList[0].strip())
-
-	for lists in textList:
-		if len(lists.strip()) != 0:
-			if initTxtLength != len(lists.strip()):
-				print 'Usage: #1 This text format is incorrect.'
-				quit()
 
 
 #-----main-----
