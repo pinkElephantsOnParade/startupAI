@@ -84,7 +84,12 @@ void outputmorph(char *target)
  int i=0 ;
  int now,last;//漢字(0)・カタカナ(1)・その他(2)の別
  last=typeset(target[i], target[i+1],target[i+2]) ;
+
  while(target[i]!='\0'){
+
+  if(target[i + 1] =='\0') break;
+  if(target[i + 2] =='\0') break;
+
   if(ispunct(&(target[i]))==0){//句読点ではない
    /*文内の処理*/
    now = typeset(target[i], target[i+1],target[i+2]) ;
