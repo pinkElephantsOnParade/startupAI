@@ -111,7 +111,7 @@ def generates(keyword, glist):
 	return botSentence
 
 """
-	全館判定
+	全角判定
 """
 def isZenkaku(sentence):
 	bFlag = True
