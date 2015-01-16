@@ -12,7 +12,7 @@
         <td>ai1.c</td>
         <td>al1.py</td>
         <td></td>
-        <td></td>
+        <td>無愛想な返答</td>
     </tr>
 </table>
 
@@ -34,7 +34,7 @@
         <td>genby2gram.c</td>
         <td>genby2gram.py</td>
         <td></td>
-        <td></td>
+        <td>2-gramをベースに用いた文章生成</td>
     </tr>
     <tr>
         <td>make1gram.c</td>
@@ -92,37 +92,49 @@
         <td>cutm_p.c</td>
         <td>cutm_p.py</td>
         <td></td>
-        <td></td>
+        <td>句点を含めた，字種に基づく形態素の切り出し</td>
     </tr>
     <tr>
         <td>cutmorph.c</td>
         <td>cutmorph.py</td>
         <td></td>
-        <td></td>
+        <td>字種に基づく形態素の切り出し</td>
     </tr>
     <tr>
         <td>cutnav.c</td>
         <td>cutnav.py</td>
         <td></td>
-        <td></td>
+        <td>字種に基づく名詞・形容詞・動詞・形容動詞の切り出し</td>
     </tr>
     <tr>
         <td>genbymorph.c</td>
         <td>genbymorph.py</td>
         <td></td>
-        <td></td>
+        <td>形態素の連鎖により文を作成する</td>
     </tr>
     <tr>
         <td>gens1.c</td>
         <td>gens1.py</td>
         <td></td>
-        <td></td>
+        <td>書き換え規則による文の生成プログラムその１</td>
     </tr>
     <tr>
         <td>gens2.c</td>
         <td>gens2.py</td>
         <td></td>
+        <td>書き換え規則による文の生成プログラムその２</td>
+    </tr>
+    <tr>
         <td></td>
+        <td>cutm_p_mecab.py</td>
+        <td></td>
+        <td>句点を含めた，字種に基づく形態素の切り出し(mecab版)</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>cutnav_mecab.py</td>
+        <td></td>
+        <td>字種に基づく名詞・形容詞・動詞・形容動詞の切り出し(mecab版)</td>
     </tr>
 </table>
 
