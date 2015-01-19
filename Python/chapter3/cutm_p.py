@@ -58,14 +58,43 @@ def isZenkaku(sentence):
 	漢字かそれ以外かの判別
 """
 def isKanji(word):
-
+	regexp = re.compile(r'^(?:\xe4[\xb8-\xbf][\x80-\xbf]|[\xe5-\xe9][\x80-\xbf][\x80-\xbf]|\xef\xa4\xa9|\xef\xa7\x9c|\xef\xa8[\x8e-\xad])+$')
+	result = regexp.search(word.encode('utf-8'))
+	if result != None :
+		return True
+	else :
+		return False
 
 """
-	カタカナかそれ以外かの判別
+	全角カタカナかそれ以外かの判別
 """
 def isKatakana(word):
+	regexp = re.compile(r'^(?:\xe3\x82[\xa1-\xbf]|\xe3\x83[\x80-\xb6]|\xe3\x83\xbc)+$')
+	result = regexp.search(word.encode('utf-8'))
+	if result != None :
+		return True
+	else :
+		return False
 
+"""
+	全角ひらがなかそれ以外かの判別
+"""
+def isHiragana(word):
+	regexp = re.compile(r'^(?:\xE3\x81[\x81-\xBF]|\xE3\x82[\x80-\x93])+$')
+	result = regexp.search(word.encode('utf-8'))
+	if result != None :
+		return True
+	else :
+		return False
 
+"""
+	区読点の判別
+"""
+def isPunct(word):
+	if word == u"．" or word == u"。" or word == u"，" or word == u"、":
+		return True
+	else :
+		return False
 
 """
 	字種の設定
@@ -74,9 +103,12 @@ def isKatakana(word):
 		その他は２
 """
 def typeset(word):
-	if isKanji(word):			return 0
-	else if isKatakana(word):	return 1
-	else :						return 2
+	if isKanji(word):
+		return 0
+	elif isKatakana(word):
+		return 1
+	else :
+		return 2
 
 """
 	形態素の切り出し
@@ -85,6 +117,23 @@ def outputMorph(sentence):
 	now = 0
 	last = 0
 	last = typeset(sentence[0])
+	outputSent = ""
+	for i,tango in enumerate(sentence):
+		pass
+		if isPunct(tango) :
+			outputSent += u"\n"
+			outputSent += tango
+			outputSent += u"\n"
+			if i < len(sentence) - 1:
+				last = typeset(sentence[i + 1]) 
+		else :
+			now = typeset(sentence[i])
+			if now != last:
+				outputSent += u"\n"
+				last = now
+			outputSent += tango
+
+	print outputSent
 
 if __name__ == "__main__":
 	txtPath = getTextPathInCommandLine()
