@@ -175,9 +175,34 @@ def outputNoun(sentence):
 
 """
 	動詞・形容詞・形容動詞の切り出し
+	[漢字][漢字]...[指定したひらがな]
 """
-def outputP(sentList):
-	print "cutting verbs or adv."
+def outputP(sentence, gobi):
+	now = 2
+	last = 2
+	temp = ""
+	k = ""
+
+	for i, word in enumerate(sentence): 
+		if i == 0:
+			last = typeset(sentence[i])	
+			if last == 0:
+#				k += sentence[i]
+				temp += sentence[i]			
+		else :
+			now = typeset(sentence[i])
+			if now == 0:
+				temp += sentence[i]
+#				k += sentence[i]
+			if now != last and last == 0:
+				if sentence[i] == gobi:
+					temp += sentence[i]
+					k += temp
+					k += u"\n"
+				temp = ""
+			last = now
+			i += 1
+	return k
 
 if __name__ == "__main__":
 	
@@ -189,11 +214,11 @@ if __name__ == "__main__":
 		if txtPath.values()[0] == 0:
 			extractList += outputNoun(sentence)
 		elif txtPath.values()[0] == 1:
-			outputP(sentence)
+			extractList += outputP(sentence, u"う")
 		elif txtPath.values()[0] == 2:
-			outputP(sentence)
+			extractList += outputP(sentence, u"い")
 		elif txtPath.values()[0] == 3:
-			outputP(sentence)
+			extractList += outputP(sentence, u"だ")
 		else :
 			extractList += outputNoun(sentence)
 
