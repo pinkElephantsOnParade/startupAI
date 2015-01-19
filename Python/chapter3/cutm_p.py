@@ -23,8 +23,6 @@ def getTextPathInCommandLine():
 		if ext != '.txt':
 			print 'Usage: # %s is not text file. You should change into the ext of text.' % argvs[1]
 			quit()
-
-
 	return argvs[1]
 
 """
