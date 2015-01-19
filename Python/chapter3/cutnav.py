@@ -160,7 +160,7 @@ def typeset(word):
 	名詞の切り出し
 """
 def outputNoun(sentList):
-	print "cutting norns"	
+	print "cutting norns"
 
 
 """
@@ -173,6 +173,7 @@ if __name__ == "__main__":
 	
 	txtPath = getTextPathInCommandLine()
 	textList = [item.strip() for item in getReadLineList(txtPath.keys()[0])]
+	extractList = ""
 
 	if txtPath.values()[0] == 0:
 		outputNoun(textList)
