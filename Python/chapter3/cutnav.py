@@ -159,9 +159,19 @@ def typeset(word):
 """
 	名詞の切り出し
 """
-def outputNoun(sentList):
-	print "cutting norns"
-
+def outputNoun(sentence):
+	now = 0
+	last = 0
+	last = typeset(sentence[0])
+	outputSent = ""
+	for i,tango in enumerate(sentence):
+		now = typeset(sentence[i])
+		if now != last and last == 0:
+			outputSent += u"\n"
+		if now == 0:
+			outputSent += tango
+		last = now
+	return outputSent
 
 """
 	動詞・形容詞・形容動詞の切り出し
@@ -175,16 +185,16 @@ if __name__ == "__main__":
 	textList = [item.strip() for item in getReadLineList(txtPath.keys()[0])]
 	extractList = ""
 
-	if txtPath.values()[0] == 0:
-		outputNoun(textList)
-	elif txtPath.values()[0] == 1:
-		outputP(textList)
-	elif txtPath.values()[0] == 2:
-		outputP(textList)
-	elif txtPath.values()[0] == 3:
-		outputP(textList)
-	else :
-		outputNoun(textList)
+	for sentence in textList:
+		if txtPath.values()[0] == 0:
+			extractList += outputNoun(sentence)
+		elif txtPath.values()[0] == 1:
+			outputP(sentence)
+		elif txtPath.values()[0] == 2:
+			outputP(sentence)
+		elif txtPath.values()[0] == 3:
+			outputP(sentence)
+		else :
+			extractList += outputNoun(sentence)
 
-#	for lists in textList:
-#		print lists
+	print extractList
