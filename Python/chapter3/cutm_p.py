@@ -133,12 +133,15 @@ def outputMorph(sentence):
 				last = now
 			outputSent += tango
 
-	print outputSent
+	return outputSent
 
 if __name__ == "__main__":
 	txtPath = getTextPathInCommandLine()
 	textList = [item.strip() for item in getReadLineList(txtPath)]
+	output = ""
 
 	for lists in textList:
 		if len(lists) != 0:
-			outputMorph(lists)
+			output += outputMorph(lists)
+
+	print output
