@@ -6,6 +6,47 @@ import sys
 import string
 import os.path
 import codecs
+from collections import Counter
+
+"""
+	拡張子.txtチェック
+"""
+def checkExeTxt(path):
+	root, ext = os.path.splitext(path)	
+	if ext == '.txt':
+		return True
+	else :
+		return False
+
+"""
+	オプションチェック
+	n(-n):名詞 				→	0
+	v(-v):動詞 				→	1
+	a(-a):形容詞 			→	2
+	d(-d):形容動詞 			→	3
+	それ以外のコマンドはエラー
+"""
+def checkOptionCommand(word):
+
+	selection = 0
+
+	if word == 'n' or word == 'v' or word == 'a' or word == 'd' or word == '-n' or word == '-v' or word == '-a' or word == '-d':
+		if word == 'n' or word == '-n':
+			selection = 0
+		elif  word == 'v' or word == '-v':
+			selection = 1
+		elif  word == 'a' or word == '-a':
+			selection = 2
+		elif  word == 'd' or word == '-d':
+			selection = 3
+		else :
+			selection = 0
+	else :
+		print 'Usage: # %s is not a option command.' % word
+		quit()
+
+	return selection
+
 
 """
 	コマンドラインから文字列を抽出する
@@ -14,19 +55,25 @@ import codecs
 def getTextPathInCommandLine():
 	argvs = sys.argv  # コマンドライン引数を格納したリストの取得
 	argc = len(argvs) # 引数の個数
+	dicPathInfo = {}
 
-
-	if argc != 2:   # 引数が２つじゃない場合は、その旨を表示
-	    print 'Usage: # python %s filepath' % argvs[0]
-	    quit()         # プログラムの終了
-	else :
-		root, ext = os.path.splitext(argvs[1])
-		if ext != '.txt':
+	if argc == 2:
+		if checkExeTxt(argvs[1]):
+			dicPathInfo[argvs[1]] = 0
+		else :
 			print 'Usage: # %s is not text file. You should change into the ext of text.' % argvs[1]
 			quit()
+	elif argc == 3:
+		if checkExeTxt(argvs[1]):
+			dicPathInfo[argvs[1]] = checkOptionCommand(argvs[2])
+		else :
+			print 'Usage: # %s is not text file. You should change into the ext of text.' % argvs[1]
+			quit()
+	else:
+	    print 'Usage: # python %s filepath' % argvs[0]
+	    quit()         # プログラムの終了
 
-
-	return argvs[1]
+	return dicPathInfo
 
 """
 	読み込んだテキストファイルを改行単位にリスト化する
@@ -42,19 +89,61 @@ def getReadLineList(path):
 		iStream.close()
 	return lineList
 
+"""
+	テキストファイルに書き込む
+"""
+def setWriteLineList(name,outstr):
+	fout = codecs.open(name + '.txt', 'a', 'utf-8')
+#	fout = codecs.open(name + '.txt', 'a')
+	fout.write(outstr) # 引数の文字列をファイルに書き込む
+	fout.close() # ファイルを閉じる
+
+
+"""
+	品詞の切り出し
+"""
+def outputPart(lists, option):
+	partList = ""
+	partKind = ""
+	outputList = []
+
+	if txtPath.values()[0] == 0:
+		partKind = u"名詞"
+	elif txtPath.values()[0] == 1:
+		partKind = u"動詞"
+	elif txtPath.values()[0] == 2:
+		partKind = u"形容詞"
+	elif txtPath.values()[0] == 3:
+		partKind = u"形容動詞"
+	else :
+		partKind = u"名詞"
+
+	try:
+		t = MeCab.Tagger (" ".join(sys.argv))
+		for sentence in lists:
+			m = t.parseToNode(sentence.encode(sys.stdout.encoding))
+			while m:
+				if m.feature.split(',')[0].decode('utf-8') == partKind:
+					outputList.append(m.feature.split(',')[6].decode('utf-8'))
+				m = m.next
+
+		return sorted(Counter(outputList).items(), key=lambda x: x[1], reverse=True)
+
+	except RuntimeError, e:
+	    print "RuntimeError:", e
+
 
 #-----main-----
 if __name__ == "__main__":
 
 	txtPath = getTextPathInCommandLine()
-	textList = [item.strip() for item in getReadLineList(txtPath)]
-	try:
-		t = MeCab.Tagger (" ".join(sys.argv))
-		for lists in textList:
-			m = t.parseToNode(lists.encode(sys.stdout.encoding))
-			while m:
-				print m.surface
-				m = m.next
+	textList = [item.strip() for item in getReadLineList(txtPath.keys()[0])]
 
-	except RuntimeError, e:
-	    print "RuntimeError:", e
+	outputList = outputPart(textList, txtPath.values()[0])
+
+	for item in outputList:
+		setWriteLineList(u"outputPart", item[0] + '\n')
+
+#		print item[0] + ',' + str(item[1])
+
+
