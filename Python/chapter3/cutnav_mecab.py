@@ -23,6 +23,7 @@ def checkExeTxt(path):
 	n(-n):名詞 				→	0
 	v(-v):動詞 				→	1
 	a(-a):形容詞 			→	2
+
 	d(-d):形容動詞 			→	3
 	それ以外のコマンドはエラー
 """
@@ -70,7 +71,7 @@ def getTextPathInCommandLine():
 			print 'Usage: # %s is not text file. You should change into the ext of text.' % argvs[1]
 			quit()
 	else:
-	    print 'Usage: # python %s filepath' % argvs[0]
+	    print 'Usage: # [python file(.py)][input file(.txt) or folder][option command]'
 	    quit()         # プログラムの終了
 
 	return dicPathInfo
@@ -79,6 +80,7 @@ def getTextPathInCommandLine():
 	読み込んだテキストファイルを改行単位にリスト化する
 """
 def getReadLineList(path):
+
 
 	if os.path.isfile(path) == False:
 		print 'Usage: # %s does not exist.' % path
@@ -137,13 +139,11 @@ def outputPart(lists, option):
 if __name__ == "__main__":
 
 	txtPath = getTextPathInCommandLine()
-	textList = [item.strip() for item in getReadLineList(txtPath.keys()[0])]
+	if os.path.isfile(txtPath.keys()[0]):
+		textList = [item.strip() for item in getReadLineList(txtPath.keys()[0])]
+		outputList = outputPart(textList, txtPath.values()[0])
 
-	outputList = outputPart(textList, txtPath.values()[0])
-
-	for item in outputList:
-		setWriteLineList(u"outputPart", item[0] + '\n')
-
-#		print item[0] + ',' + str(item[1])
+		for item in outputList:
+			setWriteLineList(u"outputPart", item[0] + '\n')
 
 
