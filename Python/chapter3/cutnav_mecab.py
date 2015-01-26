@@ -134,6 +134,19 @@ def outputPart(lists, option):
 	except RuntimeError, e:
 	    print "RuntimeError:", e
 
+def selectPartName(value):
+	name = ""
+	if value == 0:
+		name = u"noun"
+	elif value == 1:
+		name = u"verb"
+	elif value == 2:
+		name = u"adj"
+	elif value == 3:
+		name = u"adjv"
+	else :
+		name = u"noun"
+	return name
 
 #-----main-----
 if __name__ == "__main__":
@@ -141,9 +154,12 @@ if __name__ == "__main__":
 	txtPath = getTextPathInCommandLine()
 	if os.path.isfile(txtPath.keys()[0]):
 		textList = [item.strip() for item in getReadLineList(txtPath.keys()[0])]
+		textName = selectPartName(txtPath.values()[0])
 		outputList = outputPart(textList, txtPath.values()[0])
 
 		for item in outputList:
-			setWriteLineList(u"outputPart", item[0] + '\n')
+			setWriteLineList(textName, item[0] + '\n')
 
+	else :
+		print txtPath.keys()[0] + "doesn't exist."
 
