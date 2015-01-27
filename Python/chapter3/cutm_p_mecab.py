@@ -1,5 +1,5 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
+#! /usr/bin/env python
+# -*- coding:utf-8 -*-
 
 import MeCab
 import sys
@@ -42,19 +42,32 @@ def getReadLineList(path):
 		iStream.close()
 	return lineList
 
+"""
+	テキストファイルに書き込む
+"""
+def setWriteLineList(name,outstr):
+	fout = codecs.open(name + '.txt', 'a')
+	fout.write(outstr + '\n') # 引数の文字列をファイルに書き込む
+	fout.close() # ファイルを閉じる
+
 
 #-----main-----
 if __name__ == "__main__":
 
 	txtPath = getTextPathInCommandLine()
 	textList = [item.strip() for item in getReadLineList(txtPath)]
+	fout = codecs.open('morph.txt', 'a')
 	try:
 		t = MeCab.Tagger (" ".join(sys.argv))
 		for lists in textList:
-			m = t.parseToNode(lists.encode(sys.stdout.encoding))
+			m = t.parseToNode(lists.encode('utf-8'))
 			while m:
-				print m.surface
+#				setWriteLineList("morph", m.surface)
+#				fout.write(m.surface.decode('utf-8') + u'\n') # 引数の文字列をファイルに書き込む
+				if len(m.surface.strip()) != 0:
+					fout.write(m.surface + '\n') # 引数の文字列をファイルに書き込む
 				m = m.next
-
+		fout.close() # ファイルを閉じる
 	except RuntimeError, e:
 	    print "RuntimeError:", e
+
