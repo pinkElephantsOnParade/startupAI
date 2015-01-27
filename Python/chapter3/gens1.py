@@ -6,6 +6,12 @@
 		規則①	<文>→<名詞句＞＜動詞句＞
 		規則②	<名詞句>→＜名詞＞は
 		規則③　 <動詞句>→＜動詞＞
+
+	注意
+		同一フォルダ配下に
+			noun.txt
+			verb.txt
+		は必要です
 '''
 
 import sys
@@ -17,7 +23,8 @@ import random
 """
 	読み込んだテキストファイルを改行単位にリスト化する
 """
-def getReadLineList(path):
+def
+ getReadLineList(path):
 
 	if os.path.isfile(path) == False:
 		print 'Usage: # %s does not exist.' % path
@@ -57,6 +64,3 @@ if __name__ == "__main__":
 
 	for item in range(0, 50):
 		print makeSentence(nounList, verbList)
-
-#	print len(nounList)
-#	print len(verbList)
