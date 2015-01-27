@@ -30,7 +30,7 @@ int readmorph(char db[MAXNO][2][MAXLINE])
   strncpy(db[i][0],oldline,MAXLINE) ;//形態素をコピー
   strncpy(db[i][1],line,MAXLINE) ;//形態素をコピー
   strncpy(oldline,line,MAXLINE) ;
-  printf("DEBUG %s %s\n",db[i][0],db[i][1]) ;
+//  printf("%s %s\n",db[i][0],db[i][1]) ;
   ++i ;
   if(i>=MAXNO){
    fprintf(stderr,"警告　形態素数を%d個に制限します\n",MAXNO);
