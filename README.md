@@ -119,8 +119,8 @@
         <td>ai3_mecab.py</td>
         <td></td>
         <td></td>
+        <td>morph.txt</td>
         <td>入力文章を形態素解析器を用いて分析し、出力された単語リストからランダムに選択した文字列を用いて出力文字列を生成する</td>
-        <td>-</td>
     </tr>
     <tr>
         <td>cutm_p.c</td>
@@ -216,6 +216,7 @@
         <td></td>
         <td></td>
         <td>-</td>
+        <td>-</td>
     </tr>
     <tr>
         <td>cutkk.c</td>
@@ -223,12 +224,14 @@
         <td></td>
         <td></td>
         <td>-</td>
+        <td>-</td>
     </tr>
     <tr>
         <td>makesnet.c</td>
         <td>makesnet.py</td>
         <td></td>
         <td></td>
+        <td>-</td>
         <td>-</td>
     </tr>
 </table>
@@ -250,12 +253,14 @@
         <td></td>
         <td></td>
         <td>-</td>
+        <td>-</td>
     </tr>
     <tr>
         <td>ga_a.c</td>
         <td>ga_a.py</td>
         <td></td>
         <td></td>
+        <td>-</td>
         <td>-</td>
     </tr>
     <tr>
@@ -264,12 +269,14 @@
         <td></td>
         <td></td>
         <td>-</td>
+        <td>-</td>
     </tr>
     <tr>
         <td>rsearch.c</td>
         <td>rsearch.py</td>
         <td></td>
         <td></td>
+        <td>-</td>
         <td>-</td>
     </tr>
 </table>
@@ -291,6 +298,7 @@
         <td></td>
         <td></td>
         <td>-</td>
+        <td>-</td>
     </tr>
 </table>
 
@@ -309,6 +317,7 @@
         <td>ai8.py</td>
         <td></td>
         <td></td>
+        <td>-</td>
         <td>-</td>
     </tr>
 </table>
@@ -329,6 +338,7 @@
         <td>ai9.py</td>
         <td></td>
         <td></td>
+        <td>-</td>
         <td>-</td>
     </tr>
 </table>
