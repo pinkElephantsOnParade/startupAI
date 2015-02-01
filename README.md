@@ -7,12 +7,14 @@
         <th>python</th>
         <th>ruby</th>
         <th>内容</th>
+        <th>必要なファイル(python/ruby)</th>
     </tr>
     <tr>
         <td>ai1.c</td>
         <td>al1.py</td>
         <td></td>
         <td>無愛想な返答</td>
+        <td>-</td>
     </tr>
 </table>
 
@@ -23,54 +25,63 @@
         <th>python</th>
         <th>ruby</th>
         <th>内容</th>
+        <th>必要なファイル(python/ruby)</th>
     </tr>
     <tr>
         <td>ai2.c</td>
         <td>ai2.py</td>
         <td></td>
         <td></td>
+        <td>テキストファイル</td>
     </tr>
     <tr>
         <td>genby2gram.c</td>
         <td>genby2gram.py</td>
         <td></td>
         <td>2-gramをベースに用いた文章生成</td>
+        <td>テキストファイル</td>
     </tr>
     <tr>
         <td>make1gram.c</td>
         <td>make1gram.py</td>
         <td></td>
         <td>文章から1-gramを生成する</td>
+        <td>テキストファイル</td>
     </tr>
     <tr>
         <td>make2gram.c</td>
         <td>make2gram.py</td>
         <td></td>
         <td>文章から2-gramを生成する</td>
+        <td>テキストファイル</td>
     </tr>
     <tr>
         <td>make3gram.c</td>
         <td>make3gram.py</td>
         <td></td>
         <td>文章から3-gramを生成する</td>
+        <td>テキストファイル</td>
     </tr>
     <tr>
         <td>sortn.c</td>
         <td>sortn.py</td>
         <td></td>
         <td>n-gramの要素と要素の個数を出力する</td>
+        <td>n-gramファイル</td>
     </tr>
     <tr>
         <td>sorts.c</td>
         <td>sorts.py</td>
         <td></td>
         <td>n-gramの要素をソートする</td>
+        <td>n-gramファイル</td>
     </tr>
     <tr>
         <td>uniqc.c</td>
         <td>uniqc.py</td>
         <td></td>
         <td>n-gramの要素を一意にする</td>
+        <td>n-gramファイル</td>
     </tr>
 </table>
 
@@ -81,60 +92,70 @@
         <th>python</th>
         <th>ruby</th>
         <th>内容</th>
+        <th>必要なファイル(python/ruby)</th>
     </tr>
     <tr>
         <td>ai3.c</td>
         <td>ai3.py</td>
         <td></td>
         <td></td>
+        <td>morph.txt</td>
     </tr>
     <tr>
         <td>cutm_p.c</td>
         <td>cutm_p.py</td>
         <td></td>
         <td>句点を含めた，字種に基づく形態素の切り出し</td>
+        <td>テキストファイル</td>
     </tr>
     <tr>
         <td>cutmorph.c</td>
         <td>cutmorph.py</td>
         <td></td>
         <td>字種に基づく形態素の切り出し</td>
+        <td>テキストファイル</td>
     </tr>
     <tr>
         <td>cutnav.c</td>
         <td>cutnav.py</td>
         <td></td>
         <td>字種に基づく名詞・形容詞・動詞・形容動詞の切り出し</td>
+        <td>テキストファイル</td>
     </tr>
     <tr>
         <td>genbymorph.c</td>
         <td>genbymorph.py</td>
         <td></td>
         <td>形態素の連鎖により文を作成する</td>
+        <td>morph.txt</td>
     </tr>
     <tr>
         <td>gens1.c</td>
         <td>gens1.py</td>
         <td></td>
         <td>書き換え規則による文の生成プログラムその１</td>
+        <td>noun.txt<br>verb.txt</td>
     </tr>
     <tr>
         <td>gens2.c</td>
         <td>gens2.py</td>
         <td></td>
         <td>書き換え規則による文の生成プログラムその２</td>
+        <td>noun.txt<br>verb.txt<br>adj.txt<br>adjv.txt</td>
     </tr>
     <tr>
         <td></td>
         <td>cutm_p_mecab.py</td>
         <td></td>
         <td>句点を含めた，字種に基づく形態素の切り出し(mecab版)</td>
+        <td>テキストファイル</td>
     </tr>
     <tr>
         <td></td>
         <td>cutnav_mecab.py</td>
         <td></td>
         <td>字種に基づく名詞・形容詞・動詞・形容動詞の切り出し(mecab版)</td>
+        <td>テキストファイル</td>
     </tr>
 </table>
 
@@ -149,6 +170,7 @@
         <th>python</th>
         <th>ruby</th>
         <th>内容</th>
+        <th>必要なファイル(python/ruby)</th>
     </tr>
     <tr>
         <td>ai5.c</td>
@@ -178,6 +200,7 @@
         <th>python</th>
         <th>ruby</th>
         <th>内容</th>
+        <th>必要なファイル(python/ruby)</th>
     </tr>
     <tr>
         <td>ai6.c</td>
@@ -213,6 +236,7 @@
         <th>python</th>
         <th>ruby</th>
         <th>内容</th>
+        <th>必要なファイル(python/ruby)</th>
     </tr>
     <tr>
         <td>agent.c</td>
@@ -229,6 +253,7 @@
         <th>python</th>
         <th>ruby</th>
         <th>内容</th>
+        <th>必要なファイル(python/ruby)</th>
     </tr>
     <tr>
         <td>ai8.c</td>
@@ -246,6 +271,7 @@
         <th>python</th>
         <th>ruby</th>
         <th>内容</th>
+        <th>必要なファイル(python/ruby)</th>
     </tr>
     <tr>
         <td>ai9.c</td>
