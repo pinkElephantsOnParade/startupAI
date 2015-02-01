@@ -142,13 +142,6 @@ def setstartch(sentence):
 	return exKanji
 
 
-
-#	for word in sentence:
-#		if isKanji(word):
-#			exKanji += word
-#		else :
-
-
 #-----無愛想なchatbot-----
 def communication(plists):
   while 1:
