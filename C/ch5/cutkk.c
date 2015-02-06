@@ -1,9 +1,10 @@
+
 //	cutkk.c
 //	漢字やカタカナ語の抽出
 //	テキストデータから，漢字やカタカナによる語を抽出します
 
-#include<stdio.h>
-#include<string.h>
+#include <stdio.h>
+#include <string.h>
 #define MAX 65535*3 //192kバイトまで処理可能
 
 /*テキストを読み込む*/
@@ -23,7 +24,8 @@ void getwidechar(char *t,char *s,int n)
  int d;
  while(in<n){
   d=(unsigned char)s[in] ;
-  if(((d>0x7F)&&(d<0xA0))||(d>0xDF)&&(d<0xF0)){//２バイト文字
+  if(d & 0x80){//3バイト文字
+    t[out++]=s[in++];
     t[out++]=s[in++];
     t[out++]=s[in++];
   }
@@ -33,30 +35,40 @@ void getwidechar(char *t,char *s,int n)
 }
 
 /*漢字かそれ以外かの判別*/
-int iskanji(char ch)
+int iskanji(char ch0, char ch1,char ch2)
 {
- int d ;
- d=(unsigned char)ch ;
- if(d>=0x88) return 1 ;
+ int d0, d1, d2;
+ d0 = (unsigned char)ch0;
+ d1 = (unsigned char)ch1;
+ d2 = (unsigned char)ch2;
+ if((d0 == 0xe4 && ( 0xb8 <= d1 && d1 <= 0xbf) && (0x80 <= d2 && d2 <= 0xbf))
+  ||((0xe5 <= d0 && d0 <= 0xe9) && (0x80 <= d1 && d1 <= 0xbf) && (0x80 <= d2 && d2 <= 0xbf))
+  ||(d0 == 0xef && d1 == 0xa4 && d2 == 0xa9)
+  ||(d0 == 0xef && d1 == 0xa7 && d2 == 0x9c)
+  ||(d0 == 0xef && d1 == 0xa8 && (0x8e <= d2 && d2 <= 0xad))
+  ) return 1 ;
  else return 0 ;
 }
+
 /*カタカナかそれ以外かの判別*/
-int iskatakana(char ch1,char ch2)
+int iskatakana(char ch0, char ch1,char ch2)
 {
- int d1,d2 ;
- char w[3] ;
- w[0]=ch1; w[1]=ch2; w[2]='\0' ;
+ int d0,d1,d2 ;
+ d0=(unsigned char)ch0 ;
  d1=(unsigned char)ch1 ;
  d2=(unsigned char)ch2 ;
- if((d1==0x83)&&(d2>=40)&&(d2<=0x96)) return 1 ;
- if(strncmp(w,"ー",2)==0) return 1 ;//長音記号だけ特別扱い
+ if((d0==0xe3 &&(d1==0x82)&&(0xa1 <= d2 && d2<= 0xbf))
+  ||(d0==0xe3 &&(d1==0x83)&&(0x80 <= d2 && d2<= 0xb6))
+  ||(d0==0xe3 && d1==0x83 && d2 == 0xbc)
+  ) return 1 ;
  else return 0 ;
 }
+
 /*字種の設定*/
-int typeset(char ch1,char ch2)
+int typeset(char ch0, char ch1,char ch2)
 {
- if(iskanji(ch1)) return 0 ;//漢字は０
- else if(iskatakana(ch1,ch2)) return 1 ;//カタカナは１
+ if(iskanji(ch0,ch1,ch2)) return 0 ;//漢字は０
+ else if(iskatakana(ch0,ch1,ch2)) return 1 ;//カタカナは１
  else return 2 ;//その他は２
 }
 
@@ -66,17 +78,24 @@ void outputmorph(char *target)
 {
  int i=0 ;
  int now,last;//漢字(0)・カタカナ(1)・その他(2)の別
- last=typeset(target[i],target[i+1]) ;
+ last=typeset(target[i], target[i+1],target[i+2]) ;
  while(target[i]!='\0'){
-   now=typeset(target[i],target[i+1]) ;
-   if((now==0)||(now==1)){//漢字かカタカナ
-    putchar(target[i++]) ;
-    putchar(target[i++]) ;
-   }
-   else i+=2 ;//漢字・カタカナ以外の読み飛ばし
+    if(target[i + 1] =='\0') break;
+    if(target[i + 2] =='\0') break;
+
+   now = typeset(target[i], target[i+1],target[i+2]) ;
    if((now!=last)&&(last!=2)) {//字種が変わっている
     putchar('\n') ;//区切りの改行を出力
    }
+   if((now==0)||(now==1)){//漢字かカタカナ
+    putchar(target[i++]) ;
+    putchar(target[i++]) ;
+    putchar(target[i++]) ;
+   }
+   else{ 
+    i+=3 ;//漢字・カタカナ以外の読み飛ばし
+   }
+
    last=now ;
  }
 }
