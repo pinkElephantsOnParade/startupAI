@@ -23,7 +23,7 @@ void getwidechar(char *t,char *s,int n)
  int d;
  while(in<n){
   d=(unsigned char)s[in] ;
-  if(d & 0x80){//2バイト文字
+  if(d & 0x80){//3バイト文字
     t[out++]=s[in++];
     t[out++]=s[in++];
     t[out++]=s[in++];
@@ -48,6 +48,7 @@ int iskanji(char ch0, char ch1,char ch2)
   ) return 1 ;
  else return 0 ;
 }
+
 /*カタカナかそれ以外かの判別*/
 int iskatakana(char ch0, char ch1,char ch2)
 {
@@ -61,6 +62,7 @@ int iskatakana(char ch0, char ch1,char ch2)
   ) return 1 ;
  else return 0 ;
 }
+
 /*字種の設定*/
 int typeset(char ch0, char ch1,char ch2)
 {
