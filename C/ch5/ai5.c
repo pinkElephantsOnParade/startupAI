@@ -2,12 +2,12 @@
 //	プロダクションルールを用いた人工無能
 //      プロダクションルールを記述したファイル rule.txtが必要です
 
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#define MAXNO 32 //プロダクションルールの最大個数
-#define MAXSTR 64 //文字列の最大長さ
-#define MAXLINE 256 //1行のの最大長さ
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define MAXNO 32 * 4 //プロダクションルールの最大個数
+#define MAXSTR 64 * 4//文字列の最大長さ
+#define MAXLINE 256 * 4//1行のの最大長さ
 #define NORULE -1//ルールにマッチしない場合の戻り値
 
 #define FILENAME  "rule.txt" //読み込み対象ファイル

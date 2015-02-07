@@ -3,9 +3,9 @@
 //	テキストデータから意味ネットワークを作ります
 // 語の並びを記述したファイル kk.txtが必要です
 
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #define MAXNUM 4096 //意味ネットワークの最大個数
 #define MAXLINE 64 //１文の最大長さ
 #define NOPOS -1 //探索失敗の場合の値
