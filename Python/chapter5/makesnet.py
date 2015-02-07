@@ -5,6 +5,7 @@ import sys
 import os.path
 import codecs
 import re
+import random
 
 """
 	読み込んだテキストファイルを改行単位にリスト化する
@@ -47,34 +48,71 @@ def makeIsAData(tangoList):
 	return dicIsa
 
 '''
+	全ての単語が既に使われているかチェック
+'''
+def lowerAllFlagWord(lists):
+	lowerFlag = True
+	for item in lists:
+		if item[0]:
+			lowerFlag = False
+	return lowerFlag
+
+'''
+	対象リストから単語を選択
+'''
+def pickupWord(lists):
+	pWord = ""
+	maxCount = 0
+
+	while maxCount < 1000:
+		randIndex = random.randint(0, len(lists) -1)
+		if lists[randIndex][0]:
+			lists[randIndex][0] = False
+			pWord = lists[randIndex][1]
+			break
+		maxCount += 1
+
+	return pWord
+
+
+'''
 	意味ネットワークの探索
 '''
 def searchword(dic, word):
-	if dic.has_key(word):
-		for item in dic[word]:
-			print item[1]
-	else :
-		print u"ないお。。。"
+	SvsC = []
+	if dic.has_key(word) and lowerAllFlagWord(dic[word]) == False:
+		SvsC.append(word)
+		SvsC.append(pickupWord(dic[word]))
+	return SvsC
+
 
 '''
 	連想の処理
 '''
 def searchsnet(dic, word):
-	searchword(dic, word)
 
+	keyword = word
+	while 1: 
+		svsc = searchword(dic, keyword)
+		if len(svsc) == 2:
+			print svsc[0] + u"は" + svsc[1]
+			keyword = svsc[1]
+		else :
+			print keyword + u"は・・・わからない！"
+			break
 		
 if __name__ == "__main__":
 	textList = [item.strip() for item in getReadLineList("kk.txt")]
-
+#	dicISA = makeIsAData(textList)
 	print str(len(textList)) + u"個の意味ネットワークを読み込みました"
 	print u"連想を開始する単語を入力してください．"
-	commandLine = raw_input("単語：")	
+	commandLine = raw_input("単語(qで終了)：")	
 	while 1:
 		if commandLine == "q":
 			break
 		else:
 			searchsnet(makeIsAData(textList), commandLine.decode('utf-8'))
 			print u"連想を開始する次の単語を入力してください．"
-			commandLine = raw_input("単語：")
+			commandLine = raw_input("単語(qで終了)：")
 
 	print u"処理を終わります．"
