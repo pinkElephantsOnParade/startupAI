@@ -98,7 +98,7 @@ def searchsnet(dic, word):
 			print svsc[0] + u"は" + svsc[1]
 			keyword = svsc[1]
 		else :
-			print keyword + u"は・・・わからない！"
+			print keyword + u"は・・・シラネ(ﾟ⊿ﾟ)"
 			break
 		
 if __name__ == "__main__":
