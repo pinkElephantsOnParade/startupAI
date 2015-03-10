@@ -48,9 +48,9 @@ void answer(struct prule rule[MAXNO] ,int n,char *line)
 	int i,limit,no=0,point=0 ;
 
 	for(i=0;i<n;++i){// マッチするルールの個数を調べる
-   no+=rulematch(rule,i,line) ;
- }
-
+   		no+=rulematch(rule,i,line) ;
+ 	}
+ printf("Match:%d\n", no);
  if(no==0) printf("どうぞ続けてください\n") ;//マッチするルールがない
  else{//少なくとも１つはマッチするルールがある
 	 limit=setrnd(no) ;//競合解消，limit番目のルールを採用
@@ -104,7 +104,13 @@ int main()
  srand(65535) ;
  /*プロダクションルールファイルの読み込み*/
  n=readrule(rule) ;
+// int i =0;
+// for(i = 0; i < n ;i++){
+// 	printf("%s %s %s %s %s\n",rule[i].str1,rule[i].str2,
+//	                  rule[i].str3,rule[i].str4,rule[i].action);
+// }
 
+// printf("%d\n", n);
  /*オープニングメッセージ*/
  printf("さくら：さて，どうしました？\n");
  printf("あなた：");
