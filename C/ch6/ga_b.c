@@ -2,15 +2,15 @@
 // ga_aと評価方法が異なります(fitness関数が異なります）
 
 
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 #define POOLSIZE 30  //プールサイズ
 #define RULESIZE 4  //遺伝子の持つルールの数
 #define LOCUSSIZE 4 //ひとつのルールが持つ遺伝子座の数
 
-#define GMAX 3000 //打ち切り世代
+#define GMAX 10000 //打ち切り世代
 #define MRATE 0.1 //突然変異率
 
 #define LOWERLIMIT 1000 //遺伝子を印字する最低適応度

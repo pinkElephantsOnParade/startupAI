@@ -2,9 +2,9 @@
 //	ランダムサーチにより解を探索します
 
 
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 #define POOLSIZE 30  //プールサイズ
 #define RULESIZE 4  //遺伝子の持つルールの数
