@@ -12,8 +12,8 @@ POOLSIZE = 30  #プールサイズ
 RULESIZE = 4  #遺伝子の持つルールの数
 LOCUSSIZE = 4 #ひとつのルールが持つ遺伝子座の数
 
-GMAX = 3 #打ち切り世代
-MRATE = 0.5 #突然変異率
+GMAX = 10000 #打ち切り世代
+MRATE = 0.1 #突然変異率
 
 LOWERLIMIT = 0 #遺伝子を印字する最低適応度
 MAXLINES = 64 #キーワードの組み合わせの最大数
@@ -64,7 +64,9 @@ def fave(genePool, keyGene):
 	fsum = 0.0
 	for geneUnit in genePool:
 		fsum = fsum + fitness(geneUnit,keyGene)
-	return fsum
+	f_ave = fsum / POOLSIZE
+	return f_ave
+
 
 """
 	遺伝子プールの出力
@@ -97,7 +99,6 @@ def mutation(genePool):
 					regene += random.choice(source_str)
 				else :
 					regene += wordUnit
-			print geneSequence + u" -> " + regene
 			reGeneUnit.append(regene)		
 		geneSea.append(reGeneUnit)
 
@@ -129,7 +130,7 @@ if __name__ == "__main__":
 	for x in xrange(GMAX):
 		faveValue = fave(genePool, keyGene)
 		print u"第" + str(x) + u"世代 平均適応度 " + str(faveValue)
-		printgene(genePool, keyGene)
+#		printgene(genePool, keyGene)
 		genePool = mutation(genePool)
-#	print genePool	
+
  
