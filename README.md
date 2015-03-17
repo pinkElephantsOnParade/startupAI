@@ -350,3 +350,7 @@ python は 2.7.X系に準拠しています。それ以前の2系のバージョ
 python 3系は全く動きません!!!
 <br>
 すべてのファイルの文字コードはUTF-8で書かれています。C言語を実行した場合、一部の全角文字（第3・第4水準漢字など）が使えない場合があります。
+<br>
+第６章、第８章においてaiX.cをコンパイルすると下記の警告が表示されます。ispunctは句読点と読点を判別する関数です。
+<br>
+warning: conflicting types for built-in function ‘ispunct’
