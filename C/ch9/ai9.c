@@ -219,6 +219,7 @@ void outputmorph(char *target,FILE *fp)
    last=typeset(target[i],target[i+1],target[i+2]) ;   
   } 
  }
+ putc('\n',fp) ;//区切りの改行を出力
 }
 
 /*利用者の入力から形態素ファイルを更新する*/
@@ -304,7 +305,7 @@ int main()
  
  /*初期化*/
  srand(32768) ;
- strncpy(line,"人工無能を人工人格に昇華させよう．",LINENUM) ;
+ strncpy(line,"人工無能を人工人格に昇華させる．",LINENUM) ;
 
  /*会話しましょう*/
  for(i=0;i<LIMITNO;++i){
