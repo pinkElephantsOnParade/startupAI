@@ -222,17 +222,17 @@
         <td>cutkk.c</td>
         <td>cutkk.py</td>
         <td></td>
-        <td></td>
-        <td>-</td>
+        <td>漢字やカタカナ語の抽出</td>
+        <td>テキストファイル</td>
         <td>-</td>
     </tr>
     <tr>
         <td>makesnet.c</td>
         <td>makesnet.py</td>
         <td></td>
-        <td></td>
-        <td>-</td>
-        <td>-</td>
+        <td>意味ネットワークの作成</td>
+        <td>kk.txt</td>
+        <td>語のリストファイルはcutkk.pyで作成できる。</td>
     </tr>
 </table>
 
@@ -252,31 +252,31 @@
         <td>ai6.py</td>
         <td></td>
         <td></td>
-        <td>-</td>
-        <td>-</td>
+        <td>morph.txt</td>
+        <td>自動生成した文章をmorph.txtに更新</td>
     </tr>
     <tr>
         <td>ga_a.c</td>
         <td>ga_a.py</td>
         <td></td>
-        <td></td>
-        <td>-</td>
+        <td>遺伝的アルゴリズム(GA)プログラム<br>交叉・突然変異・選択</td>
+        <td>sample1.txt</td>
         <td>-</td>
     </tr>
     <tr>
         <td>ga_b.c</td>
         <td>ga_b.py</td>
         <td></td>
-        <td></td>
-        <td>-</td>
-        <td>-</td>
+        <td>遺伝的アルゴリズム(GA)プログラム<br>交叉・突然変異・選択</td>
+        <td>sample1.txt</td>
+        <td>一つの遺伝子配列に偏らないように評価する。</td>
     </tr>
     <tr>
         <td>rsearch.c</td>
         <td>rsearch.py</td>
         <td></td>
-        <td></td>
-        <td>-</td>
+        <td>遺伝的アルゴリズム(GA)プログラム<br>突然変異のみ</td>
+        <td>sample1.txt</td>
         <td>-</td>
     </tr>
 </table>
@@ -296,8 +296,8 @@
         <td>agent.c</td>
         <td>agent.py</td>
         <td></td>
-        <td></td>
-        <td>-</td>
+        <td>ジャンケンを題材にしたQ学習モデル</td>
+        <td>hands.txt<br>hands1.txt<br>hands2.txt</td>
         <td>-</td>
     </tr>
 </table>
