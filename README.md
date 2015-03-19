@@ -317,8 +317,8 @@
         <td>ai8.py</td>
         <td></td>
         <td></td>
-        <td>-</td>
-        <td>-</td>
+        <td>morph.txt</td>
+        <td>前の発言を考慮して文章を生成</td>
     </tr>
 </table>
 
@@ -338,8 +338,8 @@
         <td>ai9.py</td>
         <td></td>
         <td></td>
-        <td>-</td>
-        <td>-</td>
+        <td>morph.txt</td>
+        <td>ai8.pyにて生成した文章を自動で列挙</td>
     </tr>
 </table>
 
